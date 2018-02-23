@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:20:25 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/23 13:10:49 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/23 19:32:20 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void		put_screen_str(int **screen, int print)
 	double		*point;
 
 	point = set_get_pixel(NULL);
+	// we apply to each pixel of the screen the space-transformation
+	point = serpenski_triangle(&point);
 	where_to = 0;
 	where_to = (int)point[0] - (int)point[1] * X_SIZE;
 	where_to += location_handler(0);
@@ -28,21 +30,13 @@ void		put_screen_str(int **screen, int print)
 		(*screen)[where_to] = (print) ? 0xFF400 : 0;
 }
 
-static void	put_to_screen_string(double ***tab, int **screen,
-		int print, int *dimensions)
+static void	put_to_screen_string(double ***object, int **screen,
+		int print, int *object_dimensions)
 {
-	int			i;
-	int			j;
-
-	i = -1;
-	tab = matrix_multiplication(tab, dimensions);
-	while (tab[++i])
-	{
-		j = -1;
-		while (tab[i][++j])
-		{
-			put_screen_str(screen, print);
-		}
+	// we apply the object-space to null as we are not using any object
+	object = NULL;
+	object_dimensions = NULL;
+	put_screen_str(screen, print);
 	}
 }
 
