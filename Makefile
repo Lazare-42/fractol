@@ -1,17 +1,6 @@
-NAME = fdf
+NAME = Fract\'ol
 
-SOURCES = camera_move.c \
-		  main.c \
-		  matrix.c \
-		  parsing.c \
-		  screen_management.c \
-		  tab_operations.c \
-		  static_variables.c \
-		  check_if_input.c \
-		  center_matrix.c \
-		  draw_line.c \
-		  zoom_size.c \
-
+SOURCES = main.c \
 
 LIBDIR = libft
 MINILIBXDIR = minilibx_macos
@@ -36,16 +25,16 @@ mkbin:
 
 
 $(NAME): $(OBJS)
-	@ echo "[35m Compiling FDF...[0m"
+	@ echo "[35m Compiling Fract'ol...[0m"
 	@$(CC) $(CFLAGS)  -o $(NAME) $(OBJS) -I$(INCDIR) $(LDFLAGS) $(LNCURSES)
 	@$(OK)
 
 $(ODIR)/%.o : $(SDIR)/%.c
-	@ echo "[34m Assembling FDF object: [0m" $@
+	@ echo "[34m Assembling Fract'ol object: [0m" $@
 	@ $(CC) $(CFLAGS) -c -o $@ $< -I$(INCDIR)
 
 clean:
-	@ echo "[31m Cleaning FDF... [0m"
+	@ echo "[31m Cleaning Fract'ol... [0m"
 	@/bin/rm -rf $(ODIR)
 	@make -C $(LIBDIR) clean
 
