@@ -2,7 +2,7 @@ NAME = Fract\'ol
 
 SOURCES = main.c \
 		  screen_management.c \
-		  serpenski_triangle.c \
+		  square_fractal.c \
 		  static_variables.c \
 
 LIBDIR = libft

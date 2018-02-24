@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:20:25 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/24 12:13:56 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/24 16:02:23 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static void	put_to_screen_string(double ***object, int **screen,
 	object = NULL;
 	object_dimensions = NULL;
 	//put_screen_str(screen, print);
-	print = 0;
-	square_fractal(screen);
+	square_fractal(screen, print);
 }
 
 void		print_handler(double ***tab,

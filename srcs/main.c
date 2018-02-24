@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 12:07:08 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/24 12:19:46 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/24 15:40:38 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int		draw(int keycode)
 
 	if (!mlx)
 		mlx = my_mlx_init();
-	printf("%d\n", keycode);
 	if (keycode == 53)
 		exit(0);
 	if (keycode)

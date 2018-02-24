@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:54:32 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/24 15:09:28 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/24 16:30:50 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ int					location_handler(int input_operation);
 double				***store_tab(double ***tabtab);
 int					check_if_input(int input_operation);
 void				put_screen_str(int **screen, int print);
-void				square_fractal(int **screen);
+void				square_fractal(int **screen, int print);
+void				screen_fill(int **screen, int size,
+		int start_location, int print);
+int					set_get_color(int change);
 
 #endif

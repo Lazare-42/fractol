@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:00:05 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/24 14:59:55 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/24 16:33:49 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,15 @@ int		location_handler(int input_operation)
 		height -= Y_SIZE / 20 * X_SIZE;
 	camera_center = width + height;
 	return (camera_center);
+}
+
+int		set_get_color(int change)
+{
+	static	int black_or_white = 0xFF400;
+	if (change)
+		black_or_white += 100;
+	
+	return (black_or_white);
 }
 
 double	***store_tab(double ***tabtab)
