@@ -6,12 +6,12 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:00:05 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/23 19:01:37 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/24 14:59:55 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "../includes/fdf.h"
+#include "../includes/fractol.h"
 #include "../libft/includes/libft.h"
 
 double	*set_get_pixel(double *new_point)

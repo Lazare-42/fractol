@@ -1,6 +1,9 @@
 NAME = Fract\'ol
 
 SOURCES = main.c \
+		  screen_management.c \
+		  serpenski_triangle.c \
+		  static_variables.c \
 
 LIBDIR = libft
 MINILIBXDIR = minilibx_macos

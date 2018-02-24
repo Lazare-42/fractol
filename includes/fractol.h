@@ -6,15 +6,15 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:54:32 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/23 10:53:17 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/24 15:09:28 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# define X_SIZE 2560
-# define Y_SIZE 1440
+# define X_SIZE 2432
+# define Y_SIZE 1368
 
 # define KEY_LEFT 1
 # define KEY_RIGHT 3
@@ -39,7 +39,7 @@ typedef struct		s_mlx
 }					t_mlx;
 
 void		print_handler(double ***tabtab,
-		int print, int **screen, int *dimensions)
+		int print, int **screen, int *dimensions);
 double				***matrix_multiplication(double ***tab, int *dimensions);
 double				***center_matrix(double ***tab, int *field_size);
 double				*set_get_pixel(double *new_point);
@@ -50,5 +50,6 @@ int					location_handler(int input_operation);
 double				***store_tab(double ***tabtab);
 int					check_if_input(int input_operation);
 void				put_screen_str(int **screen, int print);
+void				square_fractal(int **screen);
 
 #endif

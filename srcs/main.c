@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 12:07:08 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/23 10:49:26 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/24 12:19:46 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,13 @@ static int		draw(int keycode)
 	printf("%d\n", keycode);
 	if (keycode == 53)
 		exit(0);
-	/*
 	if (keycode)
 	{
-		print_handler(store_tab(NULL), 0, &(mlx->screen_data), dimensions);
+		print_handler(store_tab(NULL), 0, &(mlx->screen_data), 0);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
-		store_tab(table_transform_handler(store_tab(NULL), keycode));
 	}
-	*/
-//	print_handler(store_tab(NULL), 1, &(mlx->screen_data), dimensions);
+	print_handler(store_tab(NULL), 1, &(mlx->screen_data), 0);
+
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
 	mlx_key_hook(mlx->win, draw, 0);
 	mlx_loop(mlx->mlx);
