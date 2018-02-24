@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:12:38 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/24 16:48:09 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/24 18:51:24 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,22 @@ static	void	recurse_screen_fill(int **screen,
 {
 	int new_start_location;
 	int	x_center;
+	int new_center;
 
+	new_center = size / 2;
 	x_center = start_location % X_SIZE;
-	if (size / 2 > 1)
+	if (new_center > 1)
 	{
-		new_start_location = start_location + (size / 4) - (size / 2) * X_SIZE;
-		if (new_start_location + x_center < X_SIZE)
-		screen_fill(screen, size / 2,
-				new_start_location, print);
-		new_start_location = start_location + (size / 4) + size * X_SIZE;
-		if (new_start_location + x_center < X_SIZE)
-		screen_fill(screen, size / 2,
-				new_start_location, print);
-		new_start_location = start_location + start_location + (size) + (size / 4) * X_SIZE;
-		if (new_start_location + x_center < X_SIZE)
-		screen_fill(screen, size / 2,
-				new_start_location, print);
-		new_start_location = start_location + (size / 4) * X_SIZE - size / 2;
-		if (new_start_location + x_center < X_SIZE)
-		screen_fill(screen, size / 2,
-				new_start_location, print);
+			new_start_location = start_location + (size / 4) * X_SIZE -
+				new_center;
+			screen_fill(screen, new_center, new_start_location, print);
+		   new_start_location = start_location + (size) + (size / 4) * X_SIZE;
+		   screen_fill(screen, new_center, new_start_location, print);
+		   new_start_location = start_location + (size / 4) - (new_center)
+			   * X_SIZE;
+		   screen_fill(screen, new_center, new_start_location, print);
+		   new_start_location = start_location + (size / 4) + size * X_SIZE;
+		   screen_fill(screen, new_center, new_start_location, print);
 	}
 }
 
@@ -59,12 +55,10 @@ void			screen_fill(int **screen, int size,
 		x = -1;
 		while (++x < size)
 		{
-			if (x + center_x < X_SIZE)
-			{
-				where_to = x + y * X_SIZE + start_location;
-				if (where_to >= 0 && where_to <= max_screen_pixel)
-					(*screen)[where_to] = (print) ? set_get_color(0) : 0;
-			}	
+			where_to = x + y * X_SIZE + start_location;
+			if (where_to >= 0 && where_to <= max_screen_pixel)
+				(*screen)[where_to] = (print && !(*screen)[where_to]) ?
+					set_get_color(0) : 0;
 		}
 	}
 	set_get_color(1);
