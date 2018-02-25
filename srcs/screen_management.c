@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:20:25 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/24 16:02:23 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/25 18:00:10 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ static void	put_to_screen_string(double ***object, int **screen,
 {
 	// we apply the object-space to null as we are not using any object
 	object = NULL;
+	print = 0;
 	object_dimensions = NULL;
 	//put_screen_str(screen, print);
-	square_fractal(screen, print);
+//	square_fractal(screen, print);
+	mandelbrot(screen);
 }
 
 void		print_handler(double ***tab,

@@ -4,6 +4,7 @@ SOURCES = main.c \
 		  screen_management.c \
 		  square_fractal.c \
 		  static_variables.c \
+		  mandelbrot.c \
 
 LIBDIR = libft
 MINILIBXDIR = minilibx_macos

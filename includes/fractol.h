@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:54:32 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/24 20:30:18 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/25 19:15:08 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ typedef struct		s_mlx
 	int				*screen_data;
 }					t_mlx;
 
+typedef struct		s_complx
+{
+	double			r;
+	double			i;
+}					t_complx;
+
 void		print_handler(double ***tabtab,
 		int print, int **screen, int *dimensions);
 double				***matrix_multiplication(double ***tab, int *dimensions);
@@ -54,5 +60,6 @@ void				square_fractal(int **screen, int print);
 void				screen_fill(int **screen, int size,
 		int start_location, int print);
 int					set_get_color(int change);
+void				mandelbrot(int **screen);
 
 #endif
