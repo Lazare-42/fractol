@@ -38,8 +38,7 @@ static	void	recurse_screen_fill(int **screen,
 	}
 }
 
-void			screen_fill(int **screen, int size,
-		int start_location)
+void			screen_fill(int **screen, int size, int start_location)
 {
 	static	int	max_screen_pixel = X_SIZE * Y_SIZE;
 	int			x;

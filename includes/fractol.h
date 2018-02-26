@@ -13,8 +13,8 @@
 #ifndef FDF_H
 # define FDF_H
 
-# define X_SIZE 2500
-# define Y_SIZE 1050
+# define X_SIZE 1920
+# define Y_SIZE 1200
 
 #define MAX_COLOR_DISTANCE 200
 
@@ -38,6 +38,7 @@ typedef struct		s_mlx
 	void			*win;
 	void			*image;
 	int				*screen_data;
+	int				keycode;
 }					t_mlx;
 
 typedef struct		s_complx
@@ -46,8 +47,7 @@ typedef struct		s_complx
 	double			i;
 }					t_complx;
 
-void		print_handler(double ***tabtab,
-		int print, int **screen, int *dimensions);
+void		print_handler(double ***tab, int **screen, int *dimensions, int keycode);
 double				***matrix_multiplication(double ***tab, int *dimensions);
 double				***center_matrix(double ***tab, int *field_size);
 double				*set_get_pixel(double *new_point);
@@ -59,11 +59,11 @@ double				***store_tab(double ***tabtab);
 int					check_if_input(int input_operation);
 void				put_screen_str(int **screen, int print);
 void				square_fractal(int **screen, int print);
-void				screen_fill(int **screen, int size,
-		int start_location, int print);
+void			screen_fill(int **screen, int size, int start_location);
 int					set_get_color(int change);
-void				mandelbrot(int **screen);
+void				mandelbrot(int **screen, int keycode);
 t_complx			multiply_complexes(t_complx a, t_complx b);
 t_complx	add_complexes(t_complx a, t_complx b);
+void				julia(int **screen, int keycode, t_complx complx_nbr_suite);
 
 #endif

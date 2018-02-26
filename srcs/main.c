@@ -12,6 +12,7 @@
 
 #include "../minilibx_macos/mlx.h"
 #include "../libft/includes/libft.h"
+#include "../includes/mlx_keycode.h"
 #include <unistd.h>
 #include "../includes/fractol.h"
 #include <stdlib.h>
@@ -63,11 +64,9 @@ static int		mouse_func(int button, int x, int y, t_mlx *mlx)
 	complx_nbr_suite.r = y;
 	static int erase = X_SIZE * Y_SIZE * 4;
 	ft_bzero(mlx->screen_data, erase);
-//	print_handler(store_tab(NULL), &(mlx->screen_data), 0, keycode);
+	//	print_handler(store_tab(NULL), &(mlx->screen_data), 0, keycode);
 	julia(&(mlx->screen_data), keycode, complx_nbr_suite);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
-	printf("%d\n", x);
-	printf("%d\n", y);
 	return (1);
 }
 
@@ -81,17 +80,32 @@ static int		draw(void)
 		mlx = my_mlx_init();
 		initalize = 1;
 	}
-	mlx_key_hook(mlx.win, keycode_func, (void*)&mlx);
+	//	mlx_key_hook(mlx.win, keycode_func, (void*)&mlx);
 	mlx_mouse_hook(mlx.win, mouse_func, (void*)&mlx);
+	mlx_hook(mlx.win, KEYPRESS, KEYRELEASE, keycode_func, (void*)&mlx);
 	mlx_loop(mlx.mlx);
 	return (0);
 }
 
-int				main(void)
+int				main(int ac, char **av)
 {
-	double	***tab;
+	int arg_len;
 
-	tab = NULL;
+	arg_len = 0;
+	if (ac < 2)
+		ft_myexit("Not enough arguments");
+	if (ac > 2)
+		ft_myexit("Too many arguments");
+	arg_len = ft_strlen(av[1]);
+	ft_putnbr(arg_len);
+	if (arg_len == 5 && ft_memcmp(av[1], "julia", 5))
+		ft_myexit("Unrecognized option. Pass julia, squares, mandelbrot.");
+	if (arg_len ==  10 && ft_memcmp(av[1], "mandelbrot", 10))
+		ft_myexit("Unrecognized option. Pass julia, squares, mandelbrot.");
+	if (arg_len ==  6 && ft_memcmp(av[1], "square", 6))
+		ft_myexit("Unrecognized option. Pass julia, squares, mandelbrot.");
+	if (arg_len != 6 && arg_len != 5 && arg_len != 10)
+		ft_myexit("Unrecognized option. Pass julia, squares, mandelbrot.");
 	draw();
 	return (0);
 }

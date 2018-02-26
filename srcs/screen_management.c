@@ -35,15 +35,12 @@ static void	put_to_screen_string(double ***object, int **screen,
 	object = NULL;
 	object_dimensions = NULL;
 	object = NULL;
-	screen = NULL;
-	keycode = 0;
 	//put_screen_str(screen, print);
-//	square_fractal(screen, keycode);
+	square_fractal(screen, keycode);
 	//mandelbrot(screen, keycode);
 }
 
-void		print_handler(double ***tab,
-		int **screen, int *dimensions, int keycode)
+void		print_handler(double ***tab, int **screen, int *dimensions, int keycode)
 {
 		put_to_screen_string(tab, screen, dimensions, keycode);
 }
