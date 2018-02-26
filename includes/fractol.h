@@ -13,8 +13,10 @@
 #ifndef FDF_H
 # define FDF_H
 
-# define X_SIZE 2432
-# define Y_SIZE 1368
+# define X_SIZE 2500
+# define Y_SIZE 1050
+
+#define MAX_COLOR_DISTANCE 200
 
 # define KEY_LEFT 1
 # define KEY_RIGHT 3
@@ -61,5 +63,7 @@ void				screen_fill(int **screen, int size,
 		int start_location, int print);
 int					set_get_color(int change);
 void				mandelbrot(int **screen);
+t_complx			multiply_complexes(t_complx a, t_complx b);
+t_complx	add_complexes(t_complx a, t_complx b);
 
 #endif
