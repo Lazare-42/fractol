@@ -6,6 +6,7 @@ SOURCES = main.c \
 		  static_variables.c \
 		  mandelbrot.c \
 		  complexe_operations.c \
+		  julia.c \
 
 LIBDIR = libft
 MINILIBXDIR = minilibx_macos

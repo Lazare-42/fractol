@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 16:33:51 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/26 12:46:13 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/25 20:42:40 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		suite_operation(t_complx complx_nbr, int color, t_complx suite_nbr)
 	return (0);
 }
 
-void	mandelbrot(int **screen, int keycode)
+void	mandelbrot(int **screen)
 {
 	t_complx	complx_nbr;
 	t_complx	complx_nbr_suite;
@@ -39,13 +39,19 @@ void	mandelbrot(int **screen, int keycode)
 	double increment_i;
 	int y;
 
-	static int fit_screen = 4;
-	if (keycode == KEY_DOWN)
-		fit_screen *= 0.99;
-	if (keycode == KEY_UP)
-		fit_screen *= 1.01;
-	increment_r = (double)(fit_screen / (double)X_SIZE);
-	increment_i = (double)(fit_screen / (double)Y_SIZE);
+	double 		color_3_ints;
+
+	int			one_int;
+
+	one_int = pow((double)2, (double)32);
+	color_3_ints = one_int * 3;
+
+
+	couleur / 200 = 30;
+	couleur = 200;
+
+	increment_r = (double)(4 / (double)X_SIZE);
+	increment_i = (double)(4 / (double)Y_SIZE);
 	y = -1;
 	complx_nbr.i = 2;
 	while (++y < Y_SIZE)
@@ -59,7 +65,7 @@ void	mandelbrot(int **screen, int keycode)
 			complx_nbr_suite.r = 0;
 			if ((color = suite_operation(complx_nbr, 0, complx_nbr_suite)))
 			{
-				(*screen)[x + y * X_SIZE] = 0x400ff;
+				(*screen)[x + y * X_SIZE] = ;
 			}
 			complx_nbr.r += increment_r;
 		}

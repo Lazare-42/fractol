@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:12:38 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/24 18:51:24 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/26 12:38:51 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 static	void	recurse_screen_fill(int **screen,
-		int size,int start_location, int print)
+		int size,int start_location)
 {
 	int new_start_location;
 	int	x_center;
@@ -27,19 +27,19 @@ static	void	recurse_screen_fill(int **screen,
 	{
 			new_start_location = start_location + (size / 4) * X_SIZE -
 				new_center;
-			screen_fill(screen, new_center, new_start_location, print);
+			screen_fill(screen, new_center, new_start_location);
 		   new_start_location = start_location + (size) + (size / 4) * X_SIZE;
-		   screen_fill(screen, new_center, new_start_location, print);
+		   screen_fill(screen, new_center, new_start_location);
 		   new_start_location = start_location + (size / 4) - (new_center)
 			   * X_SIZE;
-		   screen_fill(screen, new_center, new_start_location, print);
+		   screen_fill(screen, new_center, new_start_location);
 		   new_start_location = start_location + (size / 4) + size * X_SIZE;
-		   screen_fill(screen, new_center, new_start_location, print);
+		   screen_fill(screen, new_center, new_start_location);
 	}
 }
 
 void			screen_fill(int **screen, int size,
-		int start_location, int print)
+		int start_location)
 {
 	static	int	max_screen_pixel = X_SIZE * Y_SIZE;
 	int			x;
@@ -57,12 +57,11 @@ void			screen_fill(int **screen, int size,
 		{
 			where_to = x + y * X_SIZE + start_location;
 			if (where_to >= 0 && where_to <= max_screen_pixel)
-				(*screen)[where_to] = (print && !(*screen)[where_to]) ?
-					set_get_color(0) : 0;
+				(*screen)[where_to] = set_get_color(0);
 		}
 	}
 	set_get_color(1);
-	recurse_screen_fill(screen, size, start_location, print);
+	recurse_screen_fill(screen, size, start_location);
 }
 
 static int				set_get_image_center(int square_size)
@@ -76,13 +75,15 @@ static int				set_get_image_center(int square_size)
 	return (image_center);
 }
 
-void			square_fractal(int **screen, int print)
+void			square_fractal(int **screen, int keycode)
 {
 	int square_location;
 	static double square_size = Y_SIZE;
 
-	square_location = set_get_image_center(square_size);
-	screen_fill(screen, square_size / 3, square_location, print);
-	if (!print)
+	if (keycode == KEY_UP)
 		square_size *= 1.01;
+	else if (keycode == KEY_DOWN)
+		square_size *= 0.99;
+	square_location = set_get_image_center(square_size);
+	screen_fill(screen, square_size / 3, square_location);
 }

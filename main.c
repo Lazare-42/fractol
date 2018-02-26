@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 12:07:08 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/26 17:05:37 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/26 13:52:15 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include "../includes/fractol.h"
 #include <stdlib.h>
 #include <stdio.h>
-
-static int		draw(void);
 
 static	t_mlx	my_mlx_init(void)
 {
@@ -31,59 +29,45 @@ static	t_mlx	my_mlx_init(void)
 	mlx.image = mlx_new_image(mlx.mlx, X_SIZE, Y_SIZE);
 	mlx.screen_data = (int*)mlx_get_data_addr(mlx.image,
 			&bpp, &size_line, &endian);
-	print_handler(store_tab(NULL), &(mlx.screen_data), 0, mlx.keycode);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.image, 0, 0);
+	mlx_key_hook(mlx.win, key_action, &mlx);
+	mlx_loop(mlx.mlx);
 	return (mlx);
 }
-
-static int 		keycode_func(int keycode, t_mlx *mlx)
+ 
+static int		key_action(t_mlx *mlx)
 {
-	static	int erase = X_SIZE * Y_SIZE * 4;
+	static int erase_size = X_SIZE * Y_SIZE * 4;
 
-	if (keycode == 53)
+	debug();
+	ft_putnbr(mlx->keycode);
+	ft_putchar('\n');
+	if (mlx->keycode == 53)
 		exit(0);
-	if (keycode)
+	if (mlx->keycode != 53)
 	{
-		ft_bzero(mlx->screen_data, erase);
-		print_handler(store_tab(NULL), &(mlx->screen_data), 0, keycode);
+	debug();
+		ft_bzero((void*)(mlx->screen_data), erase_size);
+	debug();
+		print_handler(store_tab(NULL), &(mlx->screen_data), 0, mlx->keycode);
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
 	}
 	return (1);
 }
 
-static int		mouse_func(int button, int x, int y, t_mlx *mlx)
-{
-	(void)button;
-	(void)mlx;
-	int keycode;
-	t_complx complx_nbr_suite;
-
-	keycode = 0;
-	complx_nbr_suite.i = x;
-	complx_nbr_suite.r = y;
-	static int erase = X_SIZE * Y_SIZE * 4;
-	ft_bzero(mlx->screen_data, erase);
-//	print_handler(store_tab(NULL), &(mlx->screen_data), 0, keycode);
-	julia(&(mlx->screen_data), keycode, complx_nbr_suite);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
-	printf("%d\n", x);
-	printf("%d\n", y);
-	return (1);
-}
-
 static int		draw(void)
 {
-	static t_mlx mlx;
-	static	int initalize = 0;
+	static int		inititialize = 0;
+	static t_mlx	mlx;
 
-	if (!initalize)
+	if (!inititialize)
 	{
 		mlx = my_mlx_init();
-		initalize = 1;
+		inititialize = 1;
 	}
-	mlx_key_hook(mlx.win, keycode_func, (void*)&mlx);
-	mlx_mouse_hook(mlx.win, mouse_func, (void*)&mlx);
-	mlx_loop(mlx.mlx);
+	mlx.keycode = 0;
+	print_handler(store_tab(NULL), &(mlx.screen_data), 0, 0);
+	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.image, 0, 0);
+	ft_putnbr(mlx.keycode);
 	return (0);
 }
 

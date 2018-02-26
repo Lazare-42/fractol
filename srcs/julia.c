@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 16:33:51 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/26 12:46:13 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/26 15:34:39 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,16 @@ static int		suite_operation(t_complx complx_nbr, int color, t_complx suite_nbr)
 	return (0);
 }
 
-void	mandelbrot(int **screen, int keycode)
+void	julia(int **screen, int keycode, t_complx complx_nbr_suite)
 {
 	t_complx	complx_nbr;
-	t_complx	complx_nbr_suite;
 	int			color;
 	int x;
 	double increment_r;
 	double increment_i;
 	int y;
 
-	static int fit_screen = 4;
+	static double fit_screen = 4;
 	if (keycode == KEY_DOWN)
 		fit_screen *= 0.99;
 	if (keycode == KEY_UP)
@@ -48,6 +47,13 @@ void	mandelbrot(int **screen, int keycode)
 	increment_i = (double)(fit_screen / (double)Y_SIZE);
 	y = -1;
 	complx_nbr.i = 2;
+
+
+	double color_scale;
+
+	color_scale = 255 / MAX_COLOR_DISTANCE;
+	complx_nbr_suite.i = complx_nbr_suite.i * 2 / Y_SIZE;
+	complx_nbr_suite.r = complx_nbr_suite.r * 2 / X_SIZE;
 	while (++y < Y_SIZE)
 	{
 		complx_nbr.r = -2;
@@ -55,11 +61,9 @@ void	mandelbrot(int **screen, int keycode)
 		while (++x < X_SIZE)
 		{
 			color = 0;
-			complx_nbr_suite.i = 0;
-			complx_nbr_suite.r = 0;
 			if ((color = suite_operation(complx_nbr, 0, complx_nbr_suite)))
 			{
-				(*screen)[x + y * X_SIZE] = 0x400ff;
+				(*screen)[x + y * X_SIZE] = color * color_scale * color * color_scale * color * color_scale;
 			}
 			complx_nbr.r += increment_r;
 		}
