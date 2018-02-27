@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:24:13 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/27 11:25:07 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/27 13:14:05 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ static t_complx	multiply_complexes(t_complx a, t_complx b)
 {
 	t_complx result;
 
+	if (set_get_fractal_choosen(0) == 12)
+	{
+		a.i = fabs(a.i);
+		a.r = fabs(a.r);
+		b.i = fabs(a.i);
+		b.r = fabs(a.r);
+	}
 	result.r = a.r * b.r - a.i * b.i;
 	result.i = a.r * b.i + b.r * b.i;
 	return (result);

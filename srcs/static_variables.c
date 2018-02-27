@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:00:05 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/27 12:58:54 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/27 13:07:42 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	fractal_handler(void)
 {
 	static int		fractal_number_choosen = 0;
 	static int		erase = X_SIZE * Y_SIZE * 4;
-	static t_complx	mandelbrot = {0, 0, 0};
+	static t_complx	mandelbrot_burningship = {0, 0, 0};
 	t_mlx			mlx;
 
 	fractal_number_choosen = (!fractal_number_choosen) ?
@@ -71,8 +71,10 @@ void	fractal_handler(void)
 	if (fractal_number_choosen == 5)
 		fractal(&(mlx.screen_data), set_get_mouse_pos(0, 0));
 	else if (fractal_number_choosen == 10)
-		fractal(&(mlx.screen_data), mandelbrot);
+		fractal(&(mlx.screen_data), mandelbrot_burningship);
 	else if (fractal_number_choosen == 6)
 		square_fractal(&(mlx.screen_data));
+	else if (fractal_number_choosen == 12)
+		fractal(&(mlx.screen_data), mandelbrot_burningship);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.image, 0, 0);
 }

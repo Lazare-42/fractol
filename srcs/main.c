@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 12:07:08 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/27 11:19:41 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/27 13:17:26 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ static int		draw(void)
 	return (0);
 }
 
+static void		unrecognized_option(void)
+{
+	ft_putstr_fd("Unrecognized option. Pass julia, square,", 2);
+	ft_myexit("mandelbrot, burning_ship.");
+}
+
 int				main(int ac, char **av)
 {
 	int arg_len;
@@ -63,14 +69,16 @@ int				main(int ac, char **av)
 	if (ac > 2)
 		ft_myexit("Too many arguments");
 	arg_len = ft_strlen(av[1]);
-	if (arg_len != 6 && arg_len != 5 && arg_len != 10)
-		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
+	if (arg_len != 6 && arg_len != 5 && arg_len != 10 && arg_len != 12)
+		unrecognized_option();
 	if (arg_len == 5 && ft_memcmp(av[1], "julia", 5))
-		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
+		unrecognized_option();
 	if (arg_len == 10 && ft_memcmp(av[1], "mandelbrot", 10))
-		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
+		unrecognized_option();
 	if (arg_len == 6 && ft_memcmp(av[1], "square", 6))
-		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
+		unrecognized_option();
+	if (arg_len == 12 && ft_memcmp(av[1], "burning_ship", 12))
+		unrecognized_option();
 	set_get_fractal_choosen(arg_len);
 	draw();
 	return (0);
