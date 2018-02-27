@@ -3,9 +3,9 @@ NAME = Fract\'ol
 SOURCES = main.c \
 		  square_fractal.c \
 		  static_variables.c \
-		  mandelbrot.c \
-		  complexe_operations.c \
-		  julia.c \
+		  fractal.c \
+		  mouse_color_actions.c \
+		  user_actions.c \
 
 LIBDIR = libft
 MINILIBXDIR = minilibx_macos

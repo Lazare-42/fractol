@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 12:07:08 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/26 17:05:37 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/27 11:19:41 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static int		draw(void);
-
 static	t_mlx	my_mlx_init(void)
 {
 	t_mlx	mlx;
@@ -28,7 +26,7 @@ static	t_mlx	my_mlx_init(void)
 	int		size_line;
 
 	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, X_SIZE, Y_SIZE, "FDF");
+	mlx.win = mlx_new_window(mlx.mlx, X_SIZE, Y_SIZE, "Fract'ol");
 	mlx.image = mlx_new_image(mlx.mlx, X_SIZE, Y_SIZE);
 	mlx.screen_data = (int*)mlx_get_data_addr(mlx.image,
 			&bpp, &size_line, &endian);
@@ -37,50 +35,10 @@ static	t_mlx	my_mlx_init(void)
 	return (mlx);
 }
 
-static int 		keycode_func(int keycode, int b)
-{
-	(void)b;
-	if (keycode == 53)
-		exit(0);
-	if (keycode == 49)
-		pause_julia(1);
-	return (1);
-}
-
-static int		mouse_func(int x, int y, int b)
-{
-	(void)b;
-	double x_zoom;
-	double y_zoom;
-
-	if (pause_julia(0))
-		return (1);
-	// diviser complexestiplier par zoom size ?
-	x_zoom = (double)(x - X_SIZE / 2) * 4 / X_SIZE;
-	y_zoom = (double)(y - Y_SIZE / 2) * 4 / Y_SIZE;
-	set_get_mouse_pos(x_zoom, y_zoom);
-	if (set_get_fractal_choosen(0) == 5)
-		fractal_handler();
-	return (1);
-}
-
-static int mouse_zoom(int button, int x, int y, int b)
-{
-	(void)b;
-	if (button == 4)
-		set_get_focus(-1);
-	if (button == 5)
-		set_get_focus(1);
-	fractal_handler();
-	(void)x;
-	(void)y;
-	return (1);
-}
-
 static int		draw(void)
 {
-	static t_mlx mlx;
-	static	int initalize = 0;
+	static	t_mlx	mlx;
+	static	int		initalize = 0;
 
 	if (!initalize)
 	{
@@ -109,9 +67,9 @@ int				main(int ac, char **av)
 		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
 	if (arg_len == 5 && ft_memcmp(av[1], "julia", 5))
 		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
-	if (arg_len ==  10 && ft_memcmp(av[1], "mandelbrot", 10))
+	if (arg_len == 10 && ft_memcmp(av[1], "mandelbrot", 10))
 		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
-	if (arg_len ==  6 && ft_memcmp(av[1], "square", 6))
+	if (arg_len == 6 && ft_memcmp(av[1], "square", 6))
 		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
 	set_get_fractal_choosen(arg_len);
 	draw();

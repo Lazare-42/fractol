@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:00:05 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/24 16:33:49 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/02/27 12:58:54 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,8 @@
 #include "../includes/fractol.h"
 #include "../libft/includes/libft.h"
 #include "../minilibx_macos/mlx.h"
-#include <stdio.h>
 
-int		pause_julia(int activate)
-{
-	static int pause_mouse = 0;
-
-	if (activate && pause_mouse)
-	{
-		pause_mouse = 0;
-		return (0);
-	}
-	if (activate && !pause_mouse)
-		pause_mouse = 1;
-	return (pause_mouse);
-}
-
-t_mlx		set_get_mlx(t_mlx *mlx)
+t_mlx	set_get_mlx(t_mlx *mlx)
 {
 	static t_mlx mlx_linker;
 
@@ -52,16 +37,12 @@ double	set_get_focus(int sign)
 	return (focus);
 }
 
-t_complx	set_get_mouse_pos(double x, double y)
+double	get_fractal_focus(void)
 {
-	static t_complx mouse_pos;
+	static double fit_screen = 4;
 
-	if (x && y)
-	{
-		mouse_pos.r = x;
-		mouse_pos.i = y;
-	}
-	return (mouse_pos);
+	fit_screen *= set_get_focus(0);
+	return (fit_screen);
 }
 
 int		set_get_fractal_choosen(int fractal_number)
@@ -78,28 +59,20 @@ int		set_get_fractal_choosen(int fractal_number)
 
 void	fractal_handler(void)
 {
-	static int fractal_number_choosen = 0;
-	static	int erase = X_SIZE * Y_SIZE * 4;
-	t_mlx	mlx;
+	static int		fractal_number_choosen = 0;
+	static int		erase = X_SIZE * Y_SIZE * 4;
+	static t_complx	mandelbrot = {0, 0, 0};
+	t_mlx			mlx;
 
 	fractal_number_choosen = (!fractal_number_choosen) ?
 		set_get_fractal_choosen(0) : fractal_number_choosen;
 	mlx = set_get_mlx(NULL);
 	ft_bzero(mlx.screen_data, erase);
 	if (fractal_number_choosen == 5)
-		julia(&(mlx.screen_data), set_get_mouse_pos(0, 0));
+		fractal(&(mlx.screen_data), set_get_mouse_pos(0, 0));
 	else if (fractal_number_choosen == 10)
-		mandelbrot(&(mlx.screen_data));
+		fractal(&(mlx.screen_data), mandelbrot);
 	else if (fractal_number_choosen == 6)
 		square_fractal(&(mlx.screen_data));
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.image, 0, 0);
-}
-
-int		set_get_color(int change)
-{
-	static	int black_or_white = 0xFF400;
-	if (change)
-		black_or_white += 100;
-	
-	return (black_or_white);
 }
