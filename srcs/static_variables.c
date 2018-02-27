@@ -16,6 +16,20 @@
 #include "../minilibx_macos/mlx.h"
 #include <stdio.h>
 
+int		pause_julia(int activate)
+{
+	static int pause_mouse = 0;
+
+	if (activate && pause_mouse)
+	{
+		pause_mouse = 0;
+		return (0);
+	}
+	if (activate && !pause_mouse)
+		pause_mouse = 1;
+	return (pause_mouse);
+}
+
 t_mlx		set_get_mlx(t_mlx *mlx)
 {
 	static t_mlx mlx_linker;
@@ -23,6 +37,19 @@ t_mlx		set_get_mlx(t_mlx *mlx)
 	if (mlx)
 		mlx_linker = *mlx;
 	return (mlx_linker);
+}
+
+double	set_get_focus(int sign)
+{
+	static double focus = 1;
+
+	if (!sign)
+		return (focus);
+	if (sign < 0)
+		focus = (double)0.99;
+	if (sign > 0)
+		focus = (double)1.01;
+	return (focus);
 }
 
 t_complx	set_get_mouse_pos(double x, double y)
@@ -37,17 +64,26 @@ t_complx	set_get_mouse_pos(double x, double y)
 	return (mouse_pos);
 }
 
-void	fractal_handler(int fractal_number)
+int		set_get_fractal_choosen(int fractal_number)
+{
+	static int fractal_number_choosen = 0;
+
+	if (fractal_number)
+	{
+		fractal_number_choosen = fractal_number;
+		return (0);
+	}
+	return (fractal_number_choosen);
+}
+
+void	fractal_handler(void)
 {
 	static int fractal_number_choosen = 0;
 	static	int erase = X_SIZE * Y_SIZE * 4;
 	t_mlx	mlx;
 
-	if (fractal_number)
-	{
-		fractal_number_choosen = fractal_number;
-		return ;
-	}
+	fractal_number_choosen = (!fractal_number_choosen) ?
+		set_get_fractal_choosen(0) : fractal_number_choosen;
 	mlx = set_get_mlx(NULL);
 	ft_bzero(mlx.screen_data, erase);
 	if (fractal_number_choosen == 5)

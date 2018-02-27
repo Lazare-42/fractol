@@ -47,7 +47,6 @@ typedef struct		s_complx
 	double			i;
 }					t_complx;
 
-void		print_handler(double ***tab, int **screen, int *dimensions, int keycode);
 double				***matrix_multiplication(double ***tab, int *dimensions);
 double				***center_matrix(double ***tab, int *field_size);
 double				*set_get_pixel(double *new_point);
@@ -65,9 +64,12 @@ void				mandelbrot(int **screen);
 t_complx			multiply_complexes(t_complx a, t_complx b);
 t_complx	add_complexes(t_complx a, t_complx b);
 void				julia(int **screen, t_complx complx_nbr_suite);
-void				fractal_handler(int fractal_number);
+void				fractal_handler(void);
 int					**set_get_screen_cursor(int **screen_position);
 t_mlx				set_get_mlx(t_mlx *mlx);
 t_complx			set_get_mouse_pos(double x, double y);
+int					set_get_fractal_choosen(int fractal_number);
+double				set_get_focus(int sign);
+int					pause_julia(int activate);
 
 #endif

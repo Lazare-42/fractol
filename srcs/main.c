@@ -33,7 +33,7 @@ static	t_mlx	my_mlx_init(void)
 	mlx.screen_data = (int*)mlx_get_data_addr(mlx.image,
 			&bpp, &size_line, &endian);
 	set_get_mlx(&mlx);
-	fractal_handler(0);
+	fractal_handler();
 	return (mlx);
 }
 
@@ -42,6 +42,8 @@ static int 		keycode_func(int keycode, int b)
 	(void)b;
 	if (keycode == 53)
 		exit(0);
+	if (keycode == 49)
+		pause_julia(1);
 	return (1);
 }
 
@@ -51,10 +53,27 @@ static int		mouse_func(int x, int y, int b)
 	double x_zoom;
 	double y_zoom;
 
-	x_zoom = (double)(x - X_SIZE / 2) / X_SIZE;
-	y_zoom = (double)(y - Y_SIZE / 2) / Y_SIZE;
+	if (pause_julia(0))
+		return (1);
+	// diviser complexestiplier par zoom size ?
+	x_zoom = (double)(x - X_SIZE / 2) * 4 / X_SIZE;
+	y_zoom = (double)(y - Y_SIZE / 2) * 4 / Y_SIZE;
 	set_get_mouse_pos(x_zoom, y_zoom);
-	fractal_handler(0);
+	if (set_get_fractal_choosen(0) == 5)
+		fractal_handler();
+	return (1);
+}
+
+static int mouse_zoom(int button, int x, int y, int b)
+{
+	(void)b;
+	if (button == 4)
+		set_get_focus(-1);
+	if (button == 5)
+		set_get_focus(1);
+	fractal_handler();
+	(void)x;
+	(void)y;
 	return (1);
 }
 
@@ -69,6 +88,7 @@ static int		draw(void)
 		initalize = 1;
 	}
 	mlx_mouse_hook(mlx.win, mouse_func, 0);
+	mlx_mouse_hook(mlx.win, mouse_zoom, 0);
 	mlx_hook(mlx.win, KEYPRESS, KEYRELEASE, keycode_func, 0);
 	mlx_hook(mlx.win, MOTIONNOTIFY, MOTIONNOTIFY, mouse_func, 0);
 	mlx_loop(mlx.mlx);
@@ -93,7 +113,7 @@ int				main(int ac, char **av)
 		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
 	if (arg_len ==  6 && ft_memcmp(av[1], "square", 6))
 		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
-	fractal_handler(arg_len);
+	set_get_fractal_choosen(arg_len);
 	draw();
 	return (0);
 }

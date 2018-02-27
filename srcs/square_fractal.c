@@ -13,6 +13,7 @@
 #include "../includes/fractol.h"
 #include "../libft/includes/libft.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 static	void	recurse_screen_fill(int **screen,
 		int size,int start_location)
@@ -79,6 +80,7 @@ void			square_fractal(int **screen)
 	int square_location;
 	static double square_size = Y_SIZE;
 
+	square_size *= set_get_focus(0);
 	square_location = set_get_image_center(square_size);
 	screen_fill(screen, square_size / 3, square_location);
 }
