@@ -45,6 +45,7 @@ typedef struct		s_complx
 {
 	double			r;
 	double			i;
+	double			pos_offset;
 }					t_complx;
 
 double				***matrix_multiplication(double ***tab, int *dimensions);

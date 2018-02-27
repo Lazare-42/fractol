@@ -51,7 +51,6 @@ void	julia(int **screen, t_complx complx_nbr_suite)
 	fit_screen *= set_get_focus(0);
 	increment_r = (double)(fit_screen / (double)X_SIZE);
 	increment_i = (double)(fit_screen / (double)Y_SIZE);
-
 	y = -1;
 	complx_nbr.i = 2;
 	while (++y < Y_SIZE)

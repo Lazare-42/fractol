@@ -46,9 +46,9 @@ double	set_get_focus(int sign)
 	if (!sign)
 		return (focus);
 	if (sign < 0)
-		focus = (double)0.99;
+		focus = (double)0.9;
 	if (sign > 0)
-		focus = (double)1.01;
+		focus = (double)1.1;
 	return (focus);
 }
 

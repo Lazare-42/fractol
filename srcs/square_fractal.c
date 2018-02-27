@@ -57,7 +57,7 @@ void			screen_fill(int **screen, int size, int start_location)
 		{
 			where_to = x + y * X_SIZE + start_location;
 			if (where_to >= 0 && where_to <= max_screen_pixel)
-				(*screen)[where_to] = set_get_color(0);
+				(*screen)[where_to] = (!(*screen)[where_to]) ? set_get_color(0) : 0;
 		}
 	}
 	set_get_color(1);
@@ -80,7 +80,7 @@ void			square_fractal(int **screen)
 	int square_location;
 	static double square_size = Y_SIZE;
 
-	square_size *= set_get_focus(0);
+//	square_size *= set_get_focus(0);
 	square_location = set_get_image_center(square_size);
 	screen_fill(screen, square_size / 3, square_location);
 }
