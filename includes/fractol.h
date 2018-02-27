@@ -58,12 +58,16 @@ int					location_handler(int input_operation);
 double				***store_tab(double ***tabtab);
 int					check_if_input(int input_operation);
 void				put_screen_str(int **screen, int print);
-void				square_fractal(int **screen, int print);
+void				square_fractal(int **screen);
 void			screen_fill(int **screen, int size, int start_location);
 int					set_get_color(int change);
-void				mandelbrot(int **screen, int keycode);
+void				mandelbrot(int **screen);
 t_complx			multiply_complexes(t_complx a, t_complx b);
 t_complx	add_complexes(t_complx a, t_complx b);
-void				julia(int **screen, int keycode, t_complx complx_nbr_suite);
+void				julia(int **screen, t_complx complx_nbr_suite);
+void				fractal_handler(int fractal_number);
+int					**set_get_screen_cursor(int **screen_position);
+t_mlx				set_get_mlx(t_mlx *mlx);
+t_complx			set_get_mouse_pos(double x, double y);
 
 #endif

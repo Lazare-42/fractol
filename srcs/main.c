@@ -32,41 +32,29 @@ static	t_mlx	my_mlx_init(void)
 	mlx.image = mlx_new_image(mlx.mlx, X_SIZE, Y_SIZE);
 	mlx.screen_data = (int*)mlx_get_data_addr(mlx.image,
 			&bpp, &size_line, &endian);
-	print_handler(store_tab(NULL), &(mlx.screen_data), 0, mlx.keycode);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.image, 0, 0);
+	set_get_mlx(&mlx);
+	fractal_handler(0);
 	return (mlx);
 }
 
-static int 		keycode_func(int keycode, t_mlx *mlx)
+static int 		keycode_func(int keycode, int b)
 {
-	static	int erase = X_SIZE * Y_SIZE * 4;
-
+	(void)b;
 	if (keycode == 53)
 		exit(0);
-	if (keycode)
-	{
-		ft_bzero(mlx->screen_data, erase);
-		print_handler(store_tab(NULL), &(mlx->screen_data), 0, keycode);
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
-	}
 	return (1);
 }
 
-static int		mouse_func(int button, int x, int y, t_mlx *mlx)
+static int		mouse_func(int x, int y, int b)
 {
-	(void)button;
-	(void)mlx;
-	int keycode;
-	t_complx complx_nbr_suite;
+	(void)b;
+	double x_zoom;
+	double y_zoom;
 
-	keycode = 0;
-	complx_nbr_suite.i = x;
-	complx_nbr_suite.r = y;
-	static int erase = X_SIZE * Y_SIZE * 4;
-	ft_bzero(mlx->screen_data, erase);
-	//	print_handler(store_tab(NULL), &(mlx->screen_data), 0, keycode);
-	julia(&(mlx->screen_data), keycode, complx_nbr_suite);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
+	x_zoom = (double)(x - X_SIZE / 2) / X_SIZE;
+	y_zoom = (double)(y - Y_SIZE / 2) / Y_SIZE;
+	set_get_mouse_pos(x_zoom, y_zoom);
+	fractal_handler(0);
 	return (1);
 }
 
@@ -80,9 +68,9 @@ static int		draw(void)
 		mlx = my_mlx_init();
 		initalize = 1;
 	}
-	//	mlx_key_hook(mlx.win, keycode_func, (void*)&mlx);
-	mlx_mouse_hook(mlx.win, mouse_func, (void*)&mlx);
-	mlx_hook(mlx.win, KEYPRESS, KEYRELEASE, keycode_func, (void*)&mlx);
+	mlx_mouse_hook(mlx.win, mouse_func, 0);
+	mlx_hook(mlx.win, KEYPRESS, KEYRELEASE, keycode_func, 0);
+	mlx_hook(mlx.win, MOTIONNOTIFY, MOTIONNOTIFY, mouse_func, 0);
 	mlx_loop(mlx.mlx);
 	return (0);
 }
@@ -97,15 +85,15 @@ int				main(int ac, char **av)
 	if (ac > 2)
 		ft_myexit("Too many arguments");
 	arg_len = ft_strlen(av[1]);
-	ft_putnbr(arg_len);
-	if (arg_len == 5 && ft_memcmp(av[1], "julia", 5))
-		ft_myexit("Unrecognized option. Pass julia, squares, mandelbrot.");
-	if (arg_len ==  10 && ft_memcmp(av[1], "mandelbrot", 10))
-		ft_myexit("Unrecognized option. Pass julia, squares, mandelbrot.");
-	if (arg_len ==  6 && ft_memcmp(av[1], "square", 6))
-		ft_myexit("Unrecognized option. Pass julia, squares, mandelbrot.");
 	if (arg_len != 6 && arg_len != 5 && arg_len != 10)
-		ft_myexit("Unrecognized option. Pass julia, squares, mandelbrot.");
+		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
+	if (arg_len == 5 && ft_memcmp(av[1], "julia", 5))
+		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
+	if (arg_len ==  10 && ft_memcmp(av[1], "mandelbrot", 10))
+		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
+	if (arg_len ==  6 && ft_memcmp(av[1], "square", 6))
+		ft_myexit("Unrecognized option. Pass julia, square, mandelbrot.");
+	fractal_handler(arg_len);
 	draw();
 	return (0);
 }

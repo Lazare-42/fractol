@@ -74,15 +74,11 @@ static int				set_get_image_center(int square_size)
 	return (image_center);
 }
 
-void			square_fractal(int **screen, int keycode)
+void			square_fractal(int **screen)
 {
 	int square_location;
 	static double square_size = Y_SIZE;
 
-	if (keycode == KEY_UP)
-		square_size *= 1.01;
-	else if (keycode == KEY_DOWN)
-		square_size *= 0.99;
 	square_location = set_get_image_center(square_size);
 	screen_fill(screen, square_size / 3, square_location);
 }

@@ -29,7 +29,7 @@ static int		suite_operation(t_complx complx_nbr, int color, t_complx suite_nbr)
 	return (0);
 }
 
-void	mandelbrot(int **screen, int keycode)
+void	mandelbrot(int **screen)
 {
 	t_complx	complx_nbr;
 	t_complx	complx_nbr_suite;
@@ -40,10 +40,6 @@ void	mandelbrot(int **screen, int keycode)
 	int y;
 
 	static int fit_screen = 4;
-	if (keycode == KEY_DOWN)
-		fit_screen *= 0.99;
-	if (keycode == KEY_UP)
-		fit_screen *= 1.01;
 	increment_r = (double)(fit_screen / (double)X_SIZE);
 	increment_i = (double)(fit_screen / (double)Y_SIZE);
 	y = -1;

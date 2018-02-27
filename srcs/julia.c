@@ -16,7 +16,7 @@
 #include <stdio.h>
 
 
-static int		suite_operation(t_complx complx_nbr, int color, t_complx suite_nbr)
+static int		suite_operation(t_complx complx_nbr, double color, t_complx suite_nbr)
 {
 	while (color <= MAX_COLOR_DISTANCE)
 	{
@@ -29,31 +29,25 @@ static int		suite_operation(t_complx complx_nbr, int color, t_complx suite_nbr)
 	return (0);
 }
 
-void	julia(int **screen, int keycode, t_complx complx_nbr_suite)
+void	julia(int **screen, t_complx complx_nbr_suite)
 {
 	t_complx	complx_nbr;
-	int			color;
+	double		color;
 	int x;
 	double increment_r;
 	double increment_i;
 	int y;
 
 	static double fit_screen = 4;
-	if (keycode == KEY_DOWN)
-		fit_screen *= 0.99;
-	if (keycode == KEY_UP)
-		fit_screen *= 1.01;
+
 	increment_r = (double)(fit_screen / (double)X_SIZE);
 	increment_i = (double)(fit_screen / (double)Y_SIZE);
 	y = -1;
-	complx_nbr.i = 2;
 
 
 	double color_scale;
-
-	color_scale = 255 / MAX_COLOR_DISTANCE;
-	complx_nbr_suite.i = complx_nbr_suite.i * 2 / Y_SIZE;
-	complx_nbr_suite.r = complx_nbr_suite.r * 2 / X_SIZE;
+	color_scale = (double)(16581375) / (double)MAX_COLOR_DISTANCE;
+	complx_nbr.i = 2;
 	while (++y < Y_SIZE)
 	{
 		complx_nbr.r = -2;
@@ -63,7 +57,8 @@ void	julia(int **screen, int keycode, t_complx complx_nbr_suite)
 			color = 0;
 			if ((color = suite_operation(complx_nbr, 0, complx_nbr_suite)))
 			{
-				(*screen)[x + y * X_SIZE] = color * color_scale * color * color_scale * color * color_scale;
+				color = color * color_scale;
+				(*screen)[x + y * X_SIZE] = color;
 			}
 			complx_nbr.r += increment_r;
 		}
