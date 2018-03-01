@@ -6,6 +6,7 @@ SOURCES = main.c \
 		  fractal.c \
 		  mouse_color_actions.c \
 		  user_actions.c \
+		  frames_per_seconds.c \
 
 LIBDIR = libft
 MINILIBXDIR = minilibx_macos

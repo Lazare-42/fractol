@@ -84,4 +84,5 @@ void	fractal_handler(void)
 	else if (fractal_number_choosen == 12)
 		fractal(&(mlx.screen_data), mandelbrot_burningship);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.image, 0, 0);
+	put_fps();
 }
