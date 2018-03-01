@@ -34,8 +34,6 @@ int	mouse_func(int x, int y, int b)
 	x_zoom = (double)(x - X_SIZE / 2) * 4 / X_SIZE;
 	y_zoom = (double)(y - Y_SIZE / 2) * 4 / Y_SIZE;
 	set_get_mouse_pos(x_zoom, y_zoom);
-	if (set_get_fractal_choosen(0) == 5)
-		fractal_handler();
 	return (1);
 }
 
