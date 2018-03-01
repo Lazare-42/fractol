@@ -25,11 +25,15 @@ static	t_mlx	my_mlx_init(void)
 	int		endian;
 	int		size_line;
 
-	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, X_SIZE, Y_SIZE, "Fract'ol");
-	mlx.image = mlx_new_image(mlx.mlx, X_SIZE, Y_SIZE);
-	mlx.screen_data = (int*)mlx_get_data_addr(mlx.image,
-			&bpp, &size_line, &endian);
+	if (!(mlx.mlx = mlx_init()))
+		ft_myexit("malloc error");
+	if (!(mlx.win = mlx_new_window(mlx.mlx, X_SIZE, Y_SIZE, "Fract'ol")))
+		ft_myexit("malloc error");
+	if (!(mlx.image = mlx_new_image(mlx.mlx, X_SIZE, Y_SIZE)))
+		ft_myexit("malloc error");
+	if (!(mlx.screen_data = (int*)mlx_get_data_addr(mlx.image,
+			&bpp, &size_line, &endian)))
+		ft_myexit("malloc error");
 	set_get_mlx(&mlx);
 	fractal_handler();
 	return (mlx);
@@ -50,6 +54,7 @@ static int		draw(void)
 	mlx_hook(mlx.win, KEYPRESS, KEYRELEASE, keycode_func, 0);
 	mlx_hook(mlx.win, MOTIONNOTIFY, MOTIONNOTIFY, mouse_func, 0);
 //	fractal_handler();
+	mlx_loop_hook(mlx.mlx, loop_fractal, 0);
 	mlx_loop(mlx.mlx);
 	return (0);
 }

@@ -57,6 +57,13 @@ int		set_get_fractal_choosen(int fractal_number)
 	return (fractal_number_choosen);
 }
 
+int		loop_fractal(int necessary)
+{
+	(void)necessary;
+	fractal_handler();
+	return (1);
+}
+
 void	fractal_handler(void)
 {
 	static int		fractal_number_choosen = 0;
@@ -68,7 +75,6 @@ void	fractal_handler(void)
 		set_get_fractal_choosen(0) : fractal_number_choosen;
 	mlx = set_get_mlx(NULL);
 	ft_bzero(mlx.screen_data, erase);
-	debug();
 	if (fractal_number_choosen == 5)
 		fractal(&(mlx.screen_data), set_get_mouse_pos(0, 0));
 	else if (fractal_number_choosen == 10)
