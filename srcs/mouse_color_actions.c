@@ -26,11 +26,12 @@ int			set_get_color(int change)
 
 double		color_range(double color)
 {
-	static double color_scale = (double)(16581375) / (double)MAX_COLOR_DISTANCE;
+	static double color_scale = (double)(256 * 255 * 256) / (double)MAX_COLOR_DISTANCE;
 	static double color_chosen = 0;
 
 	if (!color)
 		return (color_chosen);
+	color--;
 	color_chosen = color * color_scale;
 	return (color_chosen);
 }
