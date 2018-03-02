@@ -48,6 +48,15 @@ typedef struct		s_complx
 	double			pos_offset;
 }					t_complx;
 
+typedef struct		s_screen_line
+{
+	t_complx		complx_nbr;
+	t_complx		complx_nbr_suite;
+	int				y;
+	int				**screen;
+	double			increment_r;
+}					t_screen_line;		
+
 double				***matrix_multiplication(double ***tab, int *dimensions);
 double				***center_matrix(double ***tab, int *field_size);
 double				*set_get_pixel(double *new_point);
