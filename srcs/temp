@@ -1,3 +1,36 @@
 
 ,Definiing a pthread is fairly easy. The function pthread_create is used, and it takes 4 arguments.
 The first argument is a pointer to a pthread_t, where the function stores the identifier of the newly-created thread. The next argument is the attribute argument. This is typically NULL, but can also point to a structure that changes the thread's attributes. the third argument is the function the new thread will start at. If the thread returns from the function, the thread is terminated as well. You can think of the function as main, since it behaves similarly. The final argument is passed to the function when the thread is started. this is similar to the argc/argv command line arguments to main, but it can be any data type. Zero is returned on success, otherwise a failure of some variety happened.
+p
+
+void			fractal(int **screen, t_complx complx_nbr_suite)
+{
+	int				y;
+	double			increment_r;
+	double			increment_i;
+	t_screen_line	screen_line[Y_SIZE];
+	pthread_t		THREAD[Y_SIZE];
+
+	increment_r = (double)(get_fractal_focus() / (double)X_SIZE);
+	increment_i = (double)(get_fractal_focus() / (double)Y_SIZE);
+	y = -1;
+	while (++y < Y_SIZE)
+	{
+		screen_line[y].complx_nbr.i = 2;
+		screen_line[y].complx_nbr_suite = complx_nbr_suite;
+		screen_line[y].y = y;
+		screen_line[y].screen = screen;
+		screen_line[y].increment_r = increment_r;
+	}
+	y = -1;
+	while (++y < Y_SIZE)
+	{
+		if (pthread_create(&THREAD[y], NULL, screen_line_test, &screen_line))
+			ft_myexit("wtf");
+	}
+	y = -1;
+	while (++y < Y_SIZE)
+	{
+		pthread_join(THREAD[y], NULL);
+	}
+}

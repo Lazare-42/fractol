@@ -53,6 +53,7 @@ typedef struct		s_screen_line
 	t_complx		complx_nbr;
 	t_complx		complx_nbr_suite;
 	int				y;
+	int				x;
 	int				**screen;
 	double			increment_r;
 }					t_screen_line;		
@@ -86,6 +87,6 @@ int					mouse_zoom(int button, int x, int y, int b);
 int					keycode_func(int keycode, int b);
 int					loop_fractal(int necessary);
 void				put_fps(void);
-pthread_t			**create_threads(void);
+//pthread_t			**create_threads(void);
 
 #endif

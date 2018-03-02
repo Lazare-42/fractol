@@ -4,7 +4,7 @@
 void	put_fps(void)
 {
 	time_t			launchtime;
-	static int		difference = 0;
+	static int		difference = -1;
 	static int		frames_per_seconds = 0;
 
 	if (!(time(&launchtime)))

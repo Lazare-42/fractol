@@ -78,20 +78,29 @@ void			fractal(int **screen, t_complx complx_nbr_suite)
 	int				y;
 	double			increment_r;
 	double			increment_i;
-	t_screen_line	screen_line;
+	t_screen_line	screen_line[Y_SIZE];
+	pthread_t		threads[Y_SIZE];
 
 	increment_r = (double)(get_fractal_focus() / (double)X_SIZE);
 	increment_i = (double)(get_fractal_focus() / (double)Y_SIZE);
 	y = -1;
-	screen_line.complx_nbr.i = 2;
 	while (++y < Y_SIZE)
 	{
-		screen_line.complx_nbr_suite = complx_nbr_suite;
-		screen_line.y = y;
-		screen_line.screen = screen;
-		screen_line.increment_r = increment_r;
-		screen_line_test(&screen_line);
-		manage_threads(screen_line);
-		screen_line.complx_nbr.i -= increment_i;
+		screen_line[y].complx_nbr.i = 2;
+		screen_line[y].complx_nbr_suite = complx_nbr_suite;
+		screen_line[y].y = y;
+		screen_line[y].screen = screen;
+		screen_line[y].increment_r = increment_r;
+		screen_line[y].complx_nbr.i -= increment_i * y;
+	}
+	y = -1;
+	while (++y < Y_SIZE)
+	{
+		pthread_create(&threads[y], NULL, (void*)screen_line_test, &(screen_line[y]));
+	}
+	y = -1;
+	while (++y < Y_SIZE)
+	{
+		pthread_join(threads[y], NULL);
 	}
 }
