@@ -86,5 +86,6 @@ int					mouse_zoom(int button, int x, int y, int b);
 int					keycode_func(int keycode, int b);
 int					loop_fractal(int necessary);
 void				put_fps(void);
+pthread_t			**create_threads(void);
 
 #endif
