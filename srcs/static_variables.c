@@ -31,9 +31,9 @@ double	set_get_focus(int sign)
 	if (!sign)
 		return (focus);
 	if (sign < 0)
-		focus = (double)0.9;
+		focus *= (double)0.95;
 	if (sign > 0)
-		focus = (double)1.1;
+		focus *= (double)1.05;
 	return (focus);
 }
 
@@ -41,7 +41,7 @@ double	get_fractal_focus(void)
 {
 	static double fit_screen = 4;
 
-	fit_screen *= set_get_focus(0);
+	fit_screen = 4 * set_get_focus(0);
 	return (fit_screen);
 }
 

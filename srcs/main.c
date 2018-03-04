@@ -53,7 +53,6 @@ static int		draw(void)
 	mlx_mouse_hook(mlx.win, mouse_zoom, 0);
 	mlx_hook(mlx.win, KEYPRESS, KEYRELEASE, keycode_func, 0);
 	mlx_hook(mlx.win, MOTIONNOTIFY, MOTIONNOTIFY, mouse_func, 0);
-//	fractal_handler();
 	mlx_loop_hook(mlx.mlx, loop_fractal, 0);
 	mlx_loop(mlx.mlx);
 	return (0);

@@ -44,7 +44,6 @@ int	mouse_zoom(int button, int x, int y, int b)
 		set_get_focus(-1);
 	if (button == 5)
 		set_get_focus(1);
-	fractal_handler();
 	(void)x;
 	(void)y;
 	return (1);

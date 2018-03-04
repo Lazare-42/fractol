@@ -70,7 +70,7 @@ int					check_if_input(int input_operation);
 void				put_screen_str(int **screen, int print);
 void				square_fractal(int **screen);
 void				screen_fill(int **screen, int size, int start_location);
-int					set_get_color(int change);
+double				square_color_range(int square_center);
 void				fractal(int **screen, t_complx complx_nbr_suite);
 void				fractal_handler(void);
 int					**set_get_screen_cursor(int **screen_position);
@@ -87,6 +87,7 @@ int					mouse_zoom(int button, int x, int y, int b);
 int					keycode_func(int keycode, int b);
 int					loop_fractal(int necessary);
 void				put_fps(void);
-//pthread_t			**create_threads(void);
+t_complx			multiply_complexes(t_complx a, t_complx b);
+t_complx			add_complexes(t_complx a, t_complx b);
 
 #endif

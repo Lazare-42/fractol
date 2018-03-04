@@ -12,33 +12,8 @@
 
 #include "../includes/fractol.h"
 #include "../libft/includes/libft.h"
-#include <math.h>
 #include <stdio.h>
-
-static t_complx	multiply_complexes(t_complx a, t_complx b)
-{
-	t_complx result;
-
-	if (set_get_fractal_choosen(0) == 12)
-	{
-		a.i = fabs(a.i);
-		a.r = fabs(a.r);
-		b.i = fabs(a.i);
-		b.r = fabs(a.r);
-	}
-	result.r = a.r * b.r - a.i * b.i;
-	result.i = a.r * b.i + b.r * b.i;
-	return (result);
-}
-
-static t_complx	add_complexes(t_complx a, t_complx b)
-{
-	t_complx result;
-
-	result.r = a.r + b.r;
-	result.i = a.i + b.i;
-	return (result);
-}
+#include <pthread.h>
 
 static int		suite_operation(t_complx complx_nbr, double color,
 		t_complx suite_nbr)
@@ -56,22 +31,32 @@ static int		suite_operation(t_complx complx_nbr, double color,
 
 void	screen_line_test(void *arg)
 {
-	t_screen_line *screen_line;
-
-	screen_line = arg;
+	t_screen_line	*screen_line;
 	int				x;
-
+	screen_line = arg;
+	// modify the complex number so r below
 	screen_line->complx_nbr.r = -2;
 	x = -1;
 	while (++x < X_SIZE)
 	{
 		if ((suite_operation(screen_line->complx_nbr, 0, screen_line->complx_nbr_suite)))
-			(*screen_line->screen)[x + screen_line->y * X_SIZE] = color_range(0);
+			(*screen_line->screen)[x + (screen_line->y) * X_SIZE] = color_range(0);
 		screen_line->complx_nbr.r += screen_line->increment_r;
 	}
 }
 
-#include <pthread.h>
+void	create_threads(t_screen_line *screen_line)
+{
+	int			y;
+	pthread_t	threads[Y_SIZE];
+
+	y = -1;
+	while (++y < Y_SIZE)
+		pthread_create(&threads[y], NULL, (void*)screen_line_test, &(screen_line[y]));
+	y = -1;
+	while (++y < Y_SIZE)
+		pthread_join(threads[y], NULL);
+}
 
 void			fractal(int **screen, t_complx complx_nbr_suite)
 {
@@ -79,28 +64,21 @@ void			fractal(int **screen, t_complx complx_nbr_suite)
 	double			increment_r;
 	double			increment_i;
 	t_screen_line	screen_line[Y_SIZE];
-	pthread_t		threads[Y_SIZE];
+	double			increment_i_increment;
 
 	increment_r = (double)(get_fractal_focus() / (double)X_SIZE);
 	increment_i = (double)(get_fractal_focus() / (double)Y_SIZE);
+	increment_i_increment = increment_i;
 	y = -1;
 	while (++y < Y_SIZE)
 	{
-		screen_line[y].complx_nbr.i = 2;
 		screen_line[y].complx_nbr_suite = complx_nbr_suite;
 		screen_line[y].y = y;
 		screen_line[y].screen = screen;
 		screen_line[y].increment_r = increment_r;
-		screen_line[y].complx_nbr.i -= increment_i * y;
+		increment_i += increment_i_increment;
+		// modify the complex number so i below
+		screen_line[y].complx_nbr.i = 2 - increment_i;
 	}
-	y = -1;
-	while (++y < Y_SIZE)
-	{
-		pthread_create(&threads[y], NULL, (void*)screen_line_test, &(screen_line[y]));
-	}
-	y = -1;
-	while (++y < Y_SIZE)
-	{
-		pthread_join(threads[y], NULL);
-	}
+	create_threads(screen_line);
 }

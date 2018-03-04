@@ -7,6 +7,7 @@ SOURCES = main.c \
 		  mouse_color_actions.c \
 		  user_actions.c \
 		  frames_per_seconds.c \
+		  complexe_operations.c \
 
 LIBDIR = libft
 MINILIBXDIR = minilibx_macos

@@ -15,13 +15,15 @@
 #include "../libft/includes/libft.h"
 #include "../minilibx_macos/mlx.h"
 
-int			set_get_color(int change)
+double		square_color_range(int square_center)
 {
-	static	int black_or_white = 0xFF400;
+	static double color_scale = (double)(256 * 255 * 256) / (X_SIZE);
+	static double color_chosen = 0;
 
-	if (change)
-		black_or_white += 100;
-	return (black_or_white);
+	if (!square_center)
+		return (color_chosen);
+	color_chosen = square_center * color_scale;
+	return (color_chosen);
 }
 
 double		color_range(double color)

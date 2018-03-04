@@ -50,6 +50,7 @@ void			screen_fill(int **screen, int size, int start_location)
 	y = -1;
 	where_to = 0;
 	center_x = start_location % X_SIZE;
+	square_color_range(center_x);
 	while (++y < size)
 	{
 		x = -1;
@@ -58,10 +59,9 @@ void			screen_fill(int **screen, int size, int start_location)
 			where_to = x + y * X_SIZE + start_location;
 			if (where_to >= 0 && where_to <= max_screen_pixel)
 				(*screen)[where_to] = (!(*screen)[where_to]) ?
-					set_get_color(0) : 0;
+					square_color_range(0) : 0;
 		}
 	}
-	set_get_color(1);
 	recurse_screen_fill(screen, size, start_location);
 }
 
@@ -79,7 +79,17 @@ void			square_fractal(int **screen)
 {
 	int				square_location;
 	static double	square_size = Y_SIZE;
+	int				change_image;
+	static int		first = 1;
 
+	change_image = Y_SIZE;
+	if (!first)
+	{
+		change_image = set_get_focus(0);
+		if (change_image == square_size)
+			return ;
+	}
+	first = 0;
 	square_size *= set_get_focus(0);
 	square_location = set_get_image_center(square_size);
 	screen_fill(screen, square_size / 3, square_location);
