@@ -14,6 +14,9 @@
 #include "../libft/includes/libft.h"
 #include <stdio.h>
 #include <pthread.h>
+#include <math.h>
+
+static void	screen_line_test(void *arg);
 
 static int		suite_operation(t_complx complx_nbr, double color,
 		t_complx suite_nbr)
@@ -29,33 +32,54 @@ static int		suite_operation(t_complx complx_nbr, double color,
 	return (0);
 }
 
-void	screen_line_test(void *arg)
-{
-	t_screen_line	*screen_line;
-	int				x;
-	screen_line = arg;
-	// modify the complex number so r below
-	screen_line->complx_nbr.r = -2;
-	x = -1;
-	while (++x < X_SIZE)
-	{
-		if ((suite_operation(screen_line->complx_nbr, 0, screen_line->complx_nbr_suite)))
-			(*screen_line->screen)[x + (screen_line->y) * X_SIZE] = color_range(0);
-		screen_line->complx_nbr.r += screen_line->increment_r;
-	}
-}
-
-void	create_threads(t_screen_line *screen_line)
+void			create_threads(t_screen_line *screen_line)
 {
 	int			y;
 	pthread_t	threads[Y_SIZE];
 
 	y = -1;
 	while (++y < Y_SIZE)
-		pthread_create(&threads[y], NULL, (void*)screen_line_test, &(screen_line[y]));
+		if (pthread_create(&threads[y], NULL, (void*)screen_line_test, &(screen_line[y])))
+			ft_myexit("thread creation error");
 	y = -1;
 	while (++y < Y_SIZE)
 		pthread_join(threads[y], NULL);
+}
+
+t_complx		zoom_mouse_offset(t_complx mouse_pos, int set_mouse)
+{
+	static t_complx offset = {0, 0, 0};
+	double			zoom;
+
+	if (set_mouse)
+	{
+		zoom = set_get_focus(0);
+		offset.i = mouse_pos.i - (mouse_pos.i - offset.i) * zoom;
+		offset.r = mouse_pos.r - (mouse_pos.r - offset.r) * zoom;
+	}
+	return (offset);
+}
+
+static void		screen_line_test(void *arg)
+{
+	t_screen_line	*screen_line;
+	double			x;
+	int				pixel_pos;
+	static int		max_screen = X_SIZE * Y_SIZE;
+	int				color;
+
+	color = 0;
+	screen_line = arg;
+	screen_line->complx_nbr.r = -2;
+	x = -1;
+	while (++x < X_SIZE)
+	{
+		if ((color = (suite_operation(screen_line->complx_nbr, 0, screen_line->complx_nbr_suite))))
+			pixel_pos = (int)x + (screen_line->y) * X_SIZE;
+		if (pixel_pos > 0 && pixel_pos < max_screen)
+			(*screen_line->screen)[pixel_pos] = color;
+		screen_line->complx_nbr.r += screen_line->increment_r;
+	}
 }
 
 void			fractal(int **screen, t_complx complx_nbr_suite)
@@ -77,7 +101,6 @@ void			fractal(int **screen, t_complx complx_nbr_suite)
 		screen_line[y].screen = screen;
 		screen_line[y].increment_r = increment_r;
 		increment_i += increment_i_increment;
-		// modify the complex number so i below
 		screen_line[y].complx_nbr.i = 2 - increment_i;
 	}
 	create_threads(screen_line);

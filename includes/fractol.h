@@ -16,7 +16,7 @@
 # define X_SIZE 1920
 # define Y_SIZE 1200
 
-# define MAX_COLOR_DISTANCE 200
+# define MAX_COLOR_DISTANCE 150
 
 # define KEY_LEFT 1
 # define KEY_RIGHT 3
@@ -31,6 +31,8 @@
 # define Z_ROTATE_UP 6
 # define Z_ROTATE_DOWN 7
 # define CAMERA_SETBACK 10932
+
+#include <pthread.h>
 
 typedef struct		s_mlx
 {
@@ -52,10 +54,13 @@ typedef struct		s_screen_line
 {
 	t_complx		complx_nbr;
 	t_complx		complx_nbr_suite;
+	pthread_mutex_t	mutex;
 	int				y;
 	int				x;
 	int				**screen;
 	double			increment_r;
+	double			offset_x;
+	double			offset_y;
 }					t_screen_line;		
 
 double				***matrix_multiplication(double ***tab, int *dimensions);

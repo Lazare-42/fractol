@@ -15,7 +15,7 @@ SDIR = srcs
 ODIR = bin
 CFLAGS = -Wall -Wextra -Werror
 INCDIR = includes
-LDFLAGS = -L$(LIBDIR) -lft -L$(MINILIBXDIR) -lmlx -framework AppKit -framework OpenGL
+LDFLAGS = -L$(LIBDIR) -lpthread -lft -L$(MINILIBXDIR) -lmlx -framework AppKit -framework OpenGL
 LNCURSES = -lncurses
 CC = clang
 SRCS = $(addprefix $(SDIR)/, $(SOURCES:.c=.c))
