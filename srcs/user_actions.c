@@ -12,6 +12,8 @@
 
 #include <stdlib.h>
 #include "../includes/fractol.h"
+#include "../libft/includes/libft.h"
+#include <stdio.h>
 
 int	keycode_func(int keycode, int b)
 {
@@ -32,7 +34,7 @@ int	mouse_func(int x, int y, int b)
 		return (1);
 	(void)b;
 	x_zoom = (double)(x - X_SIZE / (get_fractal_focus() / 2)) * get_fractal_focus() / X_SIZE;
-	y_zoom = (double)(y - X_SIZE / (get_fractal_focus() / 2)) * get_fractal_focus() / Y_SIZE;
+	y_zoom = -1 * (y - Y_SIZE / (get_fractal_focus() / 2)) * get_fractal_focus() / Y_SIZE;
 	set_get_mouse_pos(x_zoom, y_zoom);
 	return (1);
 }

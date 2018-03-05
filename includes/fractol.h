@@ -13,8 +13,8 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define X_SIZE 1920
-# define Y_SIZE 1200
+# define X_SIZE 900
+# define Y_SIZE 900
 
 # define MAX_COLOR_DISTANCE 150
 
