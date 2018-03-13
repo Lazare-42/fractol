@@ -35,7 +35,7 @@ int	mouse_func(int x, int y, int b)
 	focus = 0;
 	if (pause_julia(0))
 		return (1);
-	focus = get_fractal_focus() / 2;
+	focus = get_fractal_focus();
 	x_zoom = (double)(x / (double)X_SIZE - 0.5) * focus;
 	y_zoom = -1 * (y / (double)Y_SIZE - 0.5) *  focus;
 	set_get_mouse_pos(x_zoom, y_zoom);
@@ -45,10 +45,14 @@ int	mouse_func(int x, int y, int b)
 int	mouse_zoom(int button, int x, int y, int b)
 {
 	(void)b;
+	if (button == 4 || button == 5)
+		set_get_mouse_pos_at_zoom(-1);
 	if (button == 4)
 		set_get_focus(-1);
 	if (button == 5)
 		set_get_focus(1);
+	if (button == 4 || button == 5)
+		set_get_mouse_pos_at_zoom(1);
 	(void)x;
 	(void)y;
 	return (1);

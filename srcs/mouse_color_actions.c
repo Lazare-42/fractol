@@ -14,6 +14,7 @@
 #include "../includes/fractol.h"
 #include "../libft/includes/libft.h"
 #include "../minilibx_macos/mlx.h"
+#include <stdio.h>
 
 double		square_color_range(int square_center)
 {

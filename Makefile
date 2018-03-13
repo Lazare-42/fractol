@@ -8,6 +8,7 @@ SOURCES = main.c \
 		  user_actions.c \
 		  frames_per_seconds.c \
 		  complexe_operations.c \
+		  ./set_get_mouse_pos_at_zoom.c \
 
 LIBDIR = libft
 MINILIBXDIR = minilibx_macos

@@ -49,7 +49,6 @@ static int		draw(void)
 		mlx = my_mlx_init();
 		initalize = 1;
 	}
-	mlx_mouse_hook(mlx.win, mouse_func, 0);
 	mlx_mouse_hook(mlx.win, mouse_zoom, 0);
 	mlx_hook(mlx.win, KEYPRESS, KEYRELEASE, keycode_func, 0);
 	mlx_hook(mlx.win, MOTIONNOTIFY, MOTIONNOTIFY, mouse_func, 0);
@@ -60,8 +59,8 @@ static int		draw(void)
 
 static void		unrecognized_option(void)
 {
-	ft_putstr_fd("Unrecognized option. Pass julia, square,", 2);
-	ft_myexit("mandelbrot, burning_ship.");
+	ft_putstr_fd("Unrecognized option. Pass just one option : julia,", 2);
+	ft_myexit("square, mandelbrot, or burning_ship.");
 }
 
 int				main(int ac, char **av)
@@ -70,9 +69,9 @@ int				main(int ac, char **av)
 
 	arg_len = 0;
 	if (ac < 2)
-		ft_myexit("Not enough arguments");
+		unrecognized_option();
 	if (ac > 2)
-		ft_myexit("Too many arguments");
+		unrecognized_option();
 	arg_len = ft_strlen(av[1]);
 	if (arg_len != 6 && arg_len != 5 && arg_len != 10 && arg_len != 12)
 		unrecognized_option();

@@ -15,6 +15,8 @@
 
 # define X_SIZE 1100
 # define Y_SIZE 1100
+# define ZOOM_IN 0.8
+# define ZOOM_OUT 1.2
 
 # define MAX_COLOR_DISTANCE 150
 
@@ -22,8 +24,6 @@
 # define KEY_RIGHT 3
 # define KEY_DOWN 14
 # define KEY_UP 2
-# define ZOOM_IN 8
-# define ZOOM_OUT 9
 # define X_ROTATE_UP 126
 # define X_ROTATE_DOWN 125
 # define Y_ROTATE_UP 124
@@ -94,5 +94,6 @@ int					loop_fractal(int necessary);
 void				put_fps(void);
 t_complx			multiply_complexes(t_complx a, t_complx b);
 t_complx			add_complexes(t_complx a, t_complx b);
+t_complx			set_get_mouse_pos_at_zoom(int set);
 
 #endif

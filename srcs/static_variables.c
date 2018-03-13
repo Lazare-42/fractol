@@ -14,6 +14,7 @@
 #include "../includes/fractol.h"
 #include "../libft/includes/libft.h"
 #include "../minilibx_macos/mlx.h"
+#include <stdio.h>
 
 t_mlx	set_get_mlx(t_mlx *mlx)
 {
@@ -31,9 +32,9 @@ double	set_get_focus(int sign)
 	if (!sign)
 		return (focus);
 	if (sign < 0)
-		focus *= (double)0.8;
+		focus *= (double)(ZOOM_OUT);
 	if (sign > 0)
-		focus *= (double)1.2;
+		focus *= (double)(ZOOM_IN);
 	return (focus);
 }
 

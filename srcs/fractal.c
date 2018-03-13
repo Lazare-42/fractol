@@ -70,7 +70,6 @@ static void		screen_line_test(void *arg)
 
 	color = 0;
 	screen_line = arg;
-	screen_line->complx_nbr.r = - (get_fractal_focus() / 2);
 	x = -1;
 	while (++x < X_SIZE)
 	{
@@ -101,7 +100,8 @@ void			fractal(int **screen, t_complx complx_nbr_suite)
 		screen_line[y].screen = screen;
 		screen_line[y].increment_r = increment_r;
 		increment_i += increment_i_increment;
-		screen_line[y].complx_nbr.i = (get_fractal_focus() / 2) - increment_i;
+		screen_line[y].complx_nbr.i = (get_fractal_focus() / 2) - increment_i - set_get_mouse_pos_at_zoom(0).i;
+		screen_line[y].complx_nbr.r = - (get_fractal_focus() / 2) - set_get_mouse_pos_at_zoom(0).r;
 	}
 	create_threads(screen_line);
 }
