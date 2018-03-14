@@ -67,6 +67,7 @@ int				main(int ac, char **av)
 {
 	int arg_len;
 
+	printf("%d\n", set_get_screen_lines_per_thread(set_get_core_numbers()));
 	arg_len = 0;
 	if (ac < 2)
 		unrecognized_option();

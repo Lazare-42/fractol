@@ -8,7 +8,9 @@ SOURCES = main.c \
 		  user_actions.c \
 		  frames_per_seconds.c \
 		  complexe_operations.c \
-		  ./set_get_mouse_pos_at_zoom.c \
+		  set_get_mouse_pos_at_zoom.c \
+		  core_numbers.c \
+
 
 LIBDIR = libft
 MINILIBXDIR = minilibx_macos
@@ -33,7 +35,7 @@ mkbin:
 
 
 $(NAME): $(OBJS)
-	@ echo "[35m Compiling Fract'ol...[0m"
+	@ echo "[35m Entering Fract'ol Makefile...[0m"
 	@$(CC) $(CFLAGS)  -o $(NAME) $(OBJS) -I$(INCDIR) $(LDFLAGS) $(LNCURSES)
 	@$(OK)
 

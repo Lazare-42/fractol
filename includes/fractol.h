@@ -58,6 +58,7 @@ typedef struct		s_screen_line
 	int				y;
 	int				x;
 	int				**screen;
+	int				thread;
 	double			increment_r;
 	double			offset_x;
 	double			offset_y;
@@ -95,5 +96,7 @@ void				put_fps(void);
 t_complx			multiply_complexes(t_complx a, t_complx b);
 t_complx			add_complexes(t_complx a, t_complx b);
 t_complx			set_get_mouse_pos_at_zoom(int set);
+int					set_get_core_numbers(void);
+int					set_get_screen_lines_per_thread(int core_number);
 
 #endif
