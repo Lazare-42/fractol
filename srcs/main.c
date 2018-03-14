@@ -67,7 +67,6 @@ int				main(int ac, char **av)
 {
 	int arg_len;
 
-	ft_putnbr(ft_strlen("budhabrot"));
 	set_get_screen_lines_per_thread(set_get_core_numbers());
 	arg_len = 0;
 	if (ac < 2)
