@@ -98,5 +98,6 @@ t_complx			add_complexes(t_complx a, t_complx b);
 t_complx			set_get_mouse_pos_at_zoom(int set);
 int					set_get_core_numbers(void);
 int					set_get_screen_lines_per_thread(int core_number);
+void				budhabrot(int **screen, t_complx complx_nbr_suite);
 
 #endif

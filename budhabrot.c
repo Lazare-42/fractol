@@ -94,7 +94,7 @@ static 	t_screen_line	*create_screen_line(void)
 	return (screen_line);
 }
 
-void			budhabrot(int **screen, t_complx complx_nbr_suite)
+void			fractal(int **screen, t_complx complx_nbr_suite)
 {
 	int						y;
 	double					increment_r;

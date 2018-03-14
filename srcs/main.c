@@ -67,14 +67,15 @@ int				main(int ac, char **av)
 {
 	int arg_len;
 
-	printf("%d\n", set_get_screen_lines_per_thread(set_get_core_numbers()));
+	ft_putnbr(ft_strlen("budhabrot"));
+	set_get_screen_lines_per_thread(set_get_core_numbers());
 	arg_len = 0;
 	if (ac < 2)
 		unrecognized_option();
 	if (ac > 2)
 		unrecognized_option();
 	arg_len = ft_strlen(av[1]);
-	if (arg_len != 6 && arg_len != 5 && arg_len != 10 && arg_len != 12)
+	if (arg_len != 6 && arg_len != 5 && arg_len != 10 && arg_len != 12 && arg_len != 9)
 		unrecognized_option();
 	if (arg_len == 5 && ft_memcmp(av[1], "julia", 5))
 		unrecognized_option();
@@ -83,6 +84,8 @@ int				main(int ac, char **av)
 	if (arg_len == 6 && ft_memcmp(av[1], "square", 6))
 		unrecognized_option();
 	if (arg_len == 12 && ft_memcmp(av[1], "burning_ship", 12))
+		unrecognized_option();
+	if (arg_len == 9 && ft_memcmp(av[1], "budhabrot", 9))
 		unrecognized_option();
 	set_get_fractal_choosen(arg_len);
 	draw();

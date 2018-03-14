@@ -12,7 +12,6 @@
 
 #include "../includes/fractol.h"
 #include "../libft/includes/libft.h"
-#include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>
 #include <math.h>
@@ -52,7 +51,7 @@ static void		screen_line_test(void *arg)
 	t_screen_line	*screen_line;
 	double			x;
 	int				pixel_pos;
-	int		max_screen = X_SIZE * Y_SIZE;
+	static int		max_screen = X_SIZE * Y_SIZE;
 	int				color;
 	int				y;
 
@@ -64,40 +63,28 @@ static void		screen_line_test(void *arg)
 		x = -1;
 		while (++x < X_SIZE)
 		{
-			if ((color = (suite_operation((screen_line[y]).complx_nbr, 0, screen_line[y].complx_nbr_suite))))
-				pixel_pos = (int)x + screen_line[y].y * X_SIZE;
-			if (pixel_pos > 0 && pixel_pos < max_screen)
-				(*screen_line[y].screen)[pixel_pos] = color;
-			screen_line[y].complx_nbr.r += screen_line[y].increment_r;
+		if ((color = (suite_operation(screen_line[y].complx_nbr, 0, screen_line[y].complx_nbr_suite))))
+			pixel_pos = (int)x + (screen_line[y].y) * X_SIZE;
+		if (pixel_pos > 0 && pixel_pos < max_screen)
+			(*screen_line[y].screen)[pixel_pos] = color;
+		screen_line[y].complx_nbr.r += screen_line->increment_r;
 		}
 		y++;
 	}
 }
 
-static 	t_screen_line	*create_screen_line(void)
-{
-	t_screen_line	*screen_line;
-
-	screen_line = NULL;
-	if (!(screen_line = malloc(sizeof(t_screen_line) * Y_SIZE)))
-		ft_myexit("malloc error");
-	return (screen_line);
-}
-
 void			fractal(int **screen, t_complx complx_nbr_suite)
 {
-	int						y;
-	double					increment_r;
-	double					increment_i;
-	static t_screen_line	*screen_line = NULL;
-	double					increment_i_increment;
+	int				y;
+	double			increment_r;
+	double			increment_i;
+	t_screen_line	screen_line[Y_SIZE];
+	double			increment_i_increment;
 
 	increment_r = (double)(get_fractal_focus() / (double)X_SIZE);
 	increment_i = (double)(get_fractal_focus() / (double)Y_SIZE);
 	increment_i_increment = increment_i;
 	y = -1;
-	if (screen_line == NULL)
-		screen_line = create_screen_line();
 	while (++y < Y_SIZE)
 	{
 		screen_line[y].complx_nbr_suite = complx_nbr_suite;
