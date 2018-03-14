@@ -27,14 +27,23 @@ double		square_color_range(int square_center)
 	return (color_chosen);
 }
 
-double		color_range(double color)
+int			set_get_max_color_scale(int max_color_scale)
 {
 	static double color_scale = (double)(256 * 255 * 256) / (double)MAX_COLOR_DISTANCE;
+
+	if (max_color_scale)
+		color_scale = (double)(256 * 255 * 256) / (double)max_color_scale;
+	return (color_scale);
+}
+
+double		color_range(double color)
+{
+	double color_scale;
 	static double color_chosen = 0;
 
 	if (!color)
 		return (color_chosen);
-	color--;
+	color_scale = set_get_max_color_scale(0);
 	color_chosen = color * color_scale;
 	return (color_chosen);
 }

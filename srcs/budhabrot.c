@@ -39,7 +39,7 @@ static int		suite_operation(t_complx complx_nbr, double color,
 			where_y /= focus * 2;
 			where_y = (int)(where_y * Y_SIZE) * X_SIZE;
 			if ((int)(where_x + where_y) > 0 && (int)(where_x + where_y) < X_SIZE * Y_SIZE)
-				(*screen_line->screen)[(int)(where_x + where_y)] += 1000;
+				(*screen_line->screen)[(int)(where_x + where_y)] += 1;
 		}
 		suite_nbr = multiply_complexes(suite_nbr, suite_nbr);
 		suite_nbr = add_complexes(suite_nbr, complx_nbr);
@@ -119,4 +119,35 @@ void			budhabrot(int **screen, t_complx complx_nbr_suite)
 		screen_line[y].complx_nbr.r = - (get_fractal_focus() / 2) - set_get_mouse_pos_at_zoom(0).r;
 	}
 	create_threads(screen_line);
+	int i;
+	int x;
+	int max;
+	int color;
+
+	i = 0;
+	max = 0;
+	while (i < Y_SIZE)
+	{
+		x = 0;
+		while (x < X_SIZE)
+		{
+			max = ((*screen)[x + y * X_SIZE] > max ) ? (*screen)[x + y * X_SIZE] : max;
+			x++;
+		}
+		i++;
+	}
+	set_get_max_color_scale(max);
+	i = 0;
+	while (i < Y_SIZE)
+	{
+		x = 0;
+		while (x < X_SIZE)
+		{
+			color = color_range((*screen)[x + y * X_SIZE]);
+			(*screen)[x + y * X_SIZE] = color;
+	//		printf("%d\n", color);
+			x++;
+		}
+		i++;
+	}
 }
