@@ -15,8 +15,8 @@
 
 # define X_SIZE 1100
 # define Y_SIZE 1100
-# define ZOOM_IN 0.8
-# define ZOOM_OUT 1.2
+# define ZOOM_IN 0.95
+# define ZOOM_OUT 1.05
 
 # define MAX_COLOR_DISTANCE 150
 

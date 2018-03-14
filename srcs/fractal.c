@@ -46,20 +46,6 @@ void			create_threads(t_screen_line *screen_line)
 		pthread_join(threads[y], NULL);
 }
 
-t_complx		zoom_mouse_offset(t_complx mouse_pos, int set_mouse)
-{
-	static t_complx offset = {0, 0, 0};
-	double			zoom;
-
-	if (set_mouse)
-	{
-		zoom = set_get_focus(0);
-		offset.i = mouse_pos.i - (mouse_pos.i - offset.i) * zoom;
-		offset.r = mouse_pos.r - (mouse_pos.r - offset.r) * zoom;
-	}
-	return (offset);
-}
-
 static void		screen_line_test(void *arg)
 {
 	t_screen_line	*screen_line;

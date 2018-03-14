@@ -33,8 +33,6 @@ int	mouse_func(int x, int y, int b)
 
 	(void)b;
 	focus = 0;
-	if (pause_julia(0))
-		return (1);
 	focus = get_fractal_focus();
 	x_zoom = (double)(x / (double)X_SIZE - 0.5) * focus;
 	y_zoom = -1 * (y / (double)Y_SIZE - 0.5) *  focus;

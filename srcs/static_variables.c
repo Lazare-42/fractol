@@ -70,6 +70,7 @@ void	fractal_handler(void)
 	static int		fractal_number_choosen = 0;
 	static int		erase = X_SIZE * Y_SIZE * 4;
 	static t_complx	mandelbrot_burningship = {0, 0, 0};
+	static t_complx	julia_mouse = {0, 0, 0};
 	t_mlx			mlx;
 
 	fractal_number_choosen = (!fractal_number_choosen) ?
@@ -77,7 +78,11 @@ void	fractal_handler(void)
 	mlx = set_get_mlx(NULL);
 	ft_bzero(mlx.screen_data, erase);
 	if (fractal_number_choosen == 5)
-		fractal(&(mlx.screen_data), set_get_mouse_pos(0, 0));
+	{
+		if (!pause_julia(0))
+			julia_mouse = set_get_mouse_pos(0, 0);
+		fractal(&(mlx.screen_data), julia_mouse);
+	}
 	else if (fractal_number_choosen == 10)
 		fractal(&(mlx.screen_data), mandelbrot_burningship);
 	else if (fractal_number_choosen == 6)
