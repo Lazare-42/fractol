@@ -13,8 +13,8 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define X_SIZE 450
-# define Y_SIZE 450
+# define X_SIZE 1000
+# define Y_SIZE 1000
 # define ZOOM_IN 0.95
 # define ZOOM_OUT 1.05
 

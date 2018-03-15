@@ -17,7 +17,7 @@
 #include <pthread.h>
 #include <math.h>
 
-static void	screen_line_test(void *arg);
+static void	screen_line_func(void *arg);
 
 static int		suite_operation(t_complx complx_nbr, double color,
 		t_complx suite_nbr, t_screen_line *screen_line)
@@ -51,21 +51,7 @@ static int		suite_operation(t_complx complx_nbr, double color,
 	return (0);
 }
 
-static void			create_threads(t_screen_line *screen_line)
-{
-	int			y;
-	pthread_t	threads[Y_SIZE];
-
-	y = -1;
-	while (++y < set_get_core_numbers())
-		if (pthread_create(&threads[y], NULL, (void*)screen_line_test, &(screen_line[y * set_get_screen_lines_per_thread(0)])))
-			ft_myexit("thread creation error");
-	y = -1;
-	while (++y < set_get_core_numbers())
-		pthread_join(threads[y], NULL);
-}
-
-static void		screen_line_test(void *arg)
+static void		screen_line_func(void *arg)
 {
 	t_screen_line	*screen_line;
 	double			x;
@@ -121,7 +107,7 @@ void			budhabrot(int **screen, t_complx complx_nbr_suite)
 		screen_line[y].complx_nbr.i = (get_fractal_focus() / 2) - increment_i - set_get_mouse_pos_at_zoom(0).i;
 		screen_line[y].complx_nbr.r = - (get_fractal_focus() / 2) - set_get_mouse_pos_at_zoom(0).r;
 	}
-	create_threads(screen_line);
+	create_threads(screen_line_func, screen_line);
 	/*
 	int i;
 	int x;
