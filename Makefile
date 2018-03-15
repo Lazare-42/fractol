@@ -9,8 +9,8 @@ SOURCES = main.c \
 		  frames_per_seconds.c \
 		  complexe_operations.c \
 		  set_get_mouse_pos_at_zoom.c \
-		  core_numbers.c \
 		  budhabrot.c \
+		  thread_management.c \
 
 
 LIBDIR = libft

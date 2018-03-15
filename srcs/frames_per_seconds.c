@@ -19,10 +19,12 @@ void	put_fps(void)
 	if (time_since != launchtime)
 	{
 		if (time_since -launchtime == 1)
+		{
 			ft_putnbr((int)(fps));
+			ft_putstr(" FPS\n");
+		}
 		else
-			ft_putnbr(0);
-		ft_putstr(" FPS\n");
+			ft_putstr("FPS < 1\n");
 		if (!(time(&launchtime)))
 			return ;
 		fps = 0;

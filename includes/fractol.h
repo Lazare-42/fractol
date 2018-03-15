@@ -101,5 +101,7 @@ int					set_get_screen_lines_per_thread(int core_number);
 int					set_get_max_color_distance(int max_color_scale);
 void				budhabrot(int **screen, t_complx complx_nbr_suite);
 int					set_get_max_color_scale(int max_color_scale);;
+void				create_threads(void func(void*), void *arg);
+int					set_get_sizeof_arg(int size);
 
 #endif
