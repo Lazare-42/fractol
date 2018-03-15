@@ -38,13 +38,10 @@ int		set_get_sizeof_arg(int size)
 void			create_threads(void func(void*), void *arg)
 {
 	int			y;
-	void		*arg_size;
+	t_screen_line	*arg_size;
 	pthread_t	threads[Y_SIZE];
 
 	y = -1;
-	arg_size = NULL;
-	if (!(arg_size = malloc(sizeof(set_get_sizeof_arg(0)))))
-			ft_myexit("malloc error");
 	arg_size = arg;
 	while (++y < set_get_core_numbers())
 	{
