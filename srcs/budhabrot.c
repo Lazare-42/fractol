@@ -122,6 +122,7 @@ void			budhabrot(int **screen, t_complx complx_nbr_suite)
 		screen_line[y].complx_nbr.r = - (get_fractal_focus() / 2) - set_get_mouse_pos_at_zoom(0).r;
 	}
 	create_threads(screen_line);
+	/*
 	int i;
 	int x;
 	int max;
@@ -153,4 +154,5 @@ void			budhabrot(int **screen, t_complx complx_nbr_suite)
 		}
 		i++;
 	}
+	*/
 }
