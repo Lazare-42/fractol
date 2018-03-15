@@ -18,7 +18,7 @@
 
 double		square_color_range(int square_center)
 {
-	static double color_scale = (double)(256 * 255 * 256) / (X_SIZE);
+	static double color_scale = (double)(256 * 255) / (X_SIZE);
 	static double color_chosen = 0;
 
 	if (!square_center)

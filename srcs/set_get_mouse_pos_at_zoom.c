@@ -7,7 +7,7 @@ t_complx	set_get_mouse_pos_at_zoom(int	set)
 	static double	zoom_before;
 	static double   zoom_after;
 
-	if (!set)
+	if (!set || set_get_fractal_choosen(0) == 9)
 		return (offset);
 	if (set < 0)
 		zoom_before = set_get_focus(0) * 2;

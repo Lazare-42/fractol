@@ -1,23 +1,28 @@
 #include <sys/time.h>
 #include "../libft/includes/libft.h"
+#include <stdio.h>
 
 void	put_fps(void)
 {
-	time_t			launchtime;
-	static int		difference = -1;
-	static int		frames_per_seconds = 0;
+	static time_t	launchtime = 0;
+	time_t			time_since;
+	static int		fps = 0;
 
-	if (!(time(&launchtime)))
-		return ;
-	if (!difference)
-		difference = launchtime;
-	if (difference == launchtime)
-		frames_per_seconds++;
-	else
+	if (!launchtime)
 	{
-		ft_putnbr(frames_per_seconds);
-		ft_putstr(" FPS\n");
-		difference = 0;
-		frames_per_seconds = 0;
+		if (!(time(&launchtime)))
+			return ;
+		return ; 
 	}
+	if (!(time(&time_since)))
+		return ;
+	if (time_since != launchtime)
+	{
+		ft_putnbr((int)(fps));
+		ft_putstr(" FPS\n");
+		if (!(time(&launchtime)))
+			return ;
+		fps = 0;
+	}
+	fps++;
 }

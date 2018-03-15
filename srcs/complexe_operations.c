@@ -9,8 +9,8 @@ t_complx	multiply_complexes(t_complx a, t_complx b)
 	{
 		a.i = fabs(a.i);
 		a.r = fabs(a.r);
-		b.i = fabs(a.i) * -1;
-		b.r = fabs(a.r) * -1;
+		b.i = fabs(a.i);
+		b.r = fabs(a.r);
 	}
 	result.r = a.r * b.r - a.i * b.i;
 	result.i = a.r * b.i + b.r * b.i;

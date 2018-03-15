@@ -60,7 +60,7 @@ static int		draw(void)
 static void		unrecognized_option(void)
 {
 	ft_putstr_fd("Unrecognized option. Pass just one option : julia,", 2);
-	ft_myexit("square, mandelbrot, or burning_ship.");
+	ft_myexit(" square, mandelbrot, budhabrot or burning_ship.");
 }
 
 int				main(int ac, char **av)

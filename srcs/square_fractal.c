@@ -18,10 +18,12 @@
 static	void	recurse_screen_fill(int **screen,
 		int size, int start_location)
 {
+	static int recurse_number = 0;
 	int new_start_location;
 	int	x_center;
 	int new_center;
 
+	recurse_number++;
 	new_center = size / 2;
 	x_center = start_location % X_SIZE;
 	if (new_center > 1)
@@ -42,15 +44,14 @@ static	void	recurse_screen_fill(int **screen,
 void			screen_fill(int **screen, int size, int start_location)
 {
 	static	int	max_screen_pixel = X_SIZE * Y_SIZE;
+	static	int recurse_number = 0;
 	int			x;
 	int			y;
 	int			where_to;
-	int			center_x;
 
 	y = -1;
 	where_to = 0;
-	center_x = start_location % X_SIZE;
-	square_color_range(center_x);
+	square_color_range(recurse_number);
 	while (++y < size)
 	{
 		x = -1;
@@ -62,6 +63,7 @@ void			screen_fill(int **screen, int size, int start_location)
 					square_color_range(0) : 0;
 		}
 	}
+	recurse_number++;
 	recurse_screen_fill(screen, size, start_location);
 }
 
@@ -78,7 +80,7 @@ static int		set_get_image_center(int square_size)
 void			square_fractal(int **screen)
 {
 	int				square_location;
-	static double	square_size = Y_SIZE;
+	double			square_size = Y_SIZE;
 	int				change_image;
 	static int		first = 1;
 
