@@ -22,28 +22,31 @@ static void	screen_line_test(void *arg);
 static int		suite_operation(t_complx complx_nbr, double color,
 		t_complx suite_nbr, t_screen_line *screen_line)
 {
-	double where_x;
-	double where_y;
-	double focus;
+	double	where_x;
+	double	where_y;
+	double	half_focus;
+	double	focus;
+	int		screen_size;
 
-	focus = get_fractal_focus() / 2;
-	while (color <= 200)
+	focus = get_fractal_focus();
+	half_focus = focus / 2;
+	screen_size = X_SIZE * Y_SIZE;
+	while (++color <= 2000)
 	{
 		if ((suite_nbr.i * suite_nbr.i + suite_nbr.r * suite_nbr.r) > 4)
 			return (0);
 		else
 		{
-			where_x = (suite_nbr.i + focus) / (focus * 2);
+			where_x = (suite_nbr.i + half_focus) / (focus);
 			where_x *= X_SIZE;
-			where_y = suite_nbr.r + focus;
-			where_y /= focus * 2;
+			where_y = suite_nbr.r + half_focus;
+			where_y /= focus;
 			where_y = (int)(where_y * Y_SIZE) * X_SIZE;
 			if ((int)(where_x + where_y) > 0 && (int)(where_x + where_y) < X_SIZE * Y_SIZE)
 				(*screen_line->screen)[(int)(where_x + where_y)] += 1;
 		}
 		suite_nbr = multiply_complexes(suite_nbr, suite_nbr);
 		suite_nbr = add_complexes(suite_nbr, complx_nbr);
-		color++;
 	}
 	return (0);
 }
@@ -144,7 +147,7 @@ void			budhabrot(int **screen, t_complx complx_nbr_suite)
 		while (x < X_SIZE)
 		{
 			color = color_range((*screen)[x + y * X_SIZE]);
-			(*screen)[x + y * X_SIZE] = color;
+//			(*screen)[x + y * X_SIZE] = color;
 	//		printf("%d\n", color);
 			x++;
 		}

@@ -24,19 +24,21 @@ static int		suite_operation(t_complx complx_nbr, double color,
 {
 	double where_x;
 	double where_y;
+	double half_focus;
 	double focus;
 
-	focus = get_fractal_focus() / 2;
+	focus = get_fractal_focus();
+	half_focus = focus / 2;
 	while (color <= 200)
 	{
 		if ((suite_nbr.i * suite_nbr.i + suite_nbr.r * suite_nbr.r) > 4)
 			return (0);
 		else
 		{
-			where_x = (suite_nbr.i + focus) / (focus * 2);
+			where_x = (suite_nbr.i + half_focus) / (half_focus * 2);
 			where_x *= X_SIZE;
-			where_y = suite_nbr.r + focus;
-			where_y /= focus * 2;
+			where_y = suite_nbr.r + half_focus;
+			where_y /= half_focus * 2;
 			where_y = (int)(where_y * Y_SIZE) * X_SIZE;
 			if ((int)(where_x + where_y) > 0 && (int)(where_x + where_y) < X_SIZE * Y_SIZE)
 				(*screen_line->screen)[(int)(where_x + where_y)] += 1000;
