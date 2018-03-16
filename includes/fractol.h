@@ -43,6 +43,12 @@ typedef struct		s_mlx
 	int				keycode;
 }					t_mlx;
 
+typedef struct		s_bzero
+{
+	size_t			size;
+	void			*s;
+}					t_bzero;
+
 typedef struct		s_complx
 {
 	double			r;
@@ -102,6 +108,6 @@ int					set_get_max_color_distance(int max_color_scale);
 void				budhabrot(int **screen, t_complx complx_nbr_suite);
 int					set_get_max_color_scale(int max_color_scale);;
 void				create_threads(void func(void*), void *arg);
-int					set_get_sizeof_arg(int size);
+int					multithread_bzero_or_screenstruct(int which);
 
 #endif
