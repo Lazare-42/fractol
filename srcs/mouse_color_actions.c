@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:26:51 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/27 12:54:01 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/16 11:31:59 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ double		square_color_range(int square_center)
 	return (color_chosen);
 }
 
-int			set_get_max_color_scale(int max_color_scale)
+int			set_get_max_color_scale(int max_color_scal)
 {
-	static double color_scale = (double)(256 * 255 * 256) / (double)MAX_COLOR_DISTANCE;
+	static double color_scal = (double)((256 * 255 * 256) / MAX_COLOR_DISTANCE);
 
-	if (max_color_scale)
-		color_scale = (double)(256 * 255 * 256) / (double)max_color_scale;
-	return (color_scale);
+	if (max_color_scal)
+		color_scal = (double)(256 * 255 * 256) / (double)max_color_scal;
+	return (color_scal);
 }
 
 double		color_range(double color)
 {
-	double color_scale;
-	static double color_chosen = 0;
+	double			color_scale;
+	static double	color_chosen = 0;
 
 	if (!color)
 		return (color_chosen);

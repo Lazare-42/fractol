@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:00:05 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 10:12:52 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/16 11:46:25 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_mlx	set_get_mlx(t_mlx *mlx)
 
 double	set_get_focus(int sign)
 {
-	static double focus = 1;
+	static double focus = 4;
 
 	if (!sign)
 		return (focus);
@@ -40,9 +40,9 @@ double	set_get_focus(int sign)
 
 double	get_fractal_focus(void)
 {
-	static double fit_screen = 4;
+	static double fit_screen = 1;
 
-	fit_screen = 4 * set_get_focus(0);
+	fit_screen = set_get_focus(0);
 	return (fit_screen);
 }
 
@@ -56,13 +56,6 @@ int		set_get_fractal_choosen(int fractal_number)
 		return (0);
 	}
 	return (fractal_number_choosen);
-}
-
-int		loop_fractal(int necessary)
-{
-	(void)necessary;
-	fractal_handler();
-	return (1);
 }
 
 void	fractal_handler(void)

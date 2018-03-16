@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:12:38 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/27 12:56:56 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/16 11:50:23 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 static	void	recurse_screen_fill(int **screen,
 		int size, int start_location)
 {
-	static int recurse_number = 0;
-	int new_start_location;
-	int	x_center;
-	int new_center;
+	static int	recurse_number = 0;
+	int			new_start_location;
+	int			x_center;
+	int			new_center;
 
 	recurse_number++;
 	new_center = size / 2;
@@ -80,7 +80,7 @@ static int		set_get_image_center(int square_size)
 void			square_fractal(int **screen)
 {
 	int				square_location;
-	double			square_size = Y_SIZE;
+	static double	square_size = Y_SIZE;
 	int				change_image;
 	static int		first = 1;
 

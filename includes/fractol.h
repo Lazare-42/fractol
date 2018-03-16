@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:21:32 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 10:13:34 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/16 11:47:15 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int					mouse_zoom(int button, int x, int y, int b);
 int					mouse_func(int x, int y, int b);
 int					mouse_zoom(int button, int x, int y, int b);
 int					keycode_func(int keycode, int b);
-int					loop_fractal(int necessary);
 void				put_fps(void);
 t_complx			multiply_complexes(t_complx a, t_complx b);
 t_complx			add_complexes(t_complx a, t_complx b);

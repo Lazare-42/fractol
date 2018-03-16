@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:24:13 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 10:13:18 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/16 11:29:04 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <math.h>
-
-static void	screen_line_func(void *arg);
 
 static int		suite_operation(t_complx complx_nbr, double color,
 		t_complx suite_nbr)
@@ -38,22 +36,21 @@ static void		screen_line_func(void *arg)
 	double			x;
 	int				pixel_pos;
 	static int		max_screen = X_SIZE * Y_SIZE;
-	int				color;
 	int				y;
 
 	y = 0;
-	color = 0;
 	screen_line = arg;
 	while (y < set_get_screen_lines_per_thread(0))
 	{
 		x = -1;
 		while (++x < X_SIZE)
 		{
-		if ((color = (suite_operation(screen_line[y].complx_nbr, 0, screen_line[y].complx_nbr_suite))))
 			pixel_pos = (int)x + (screen_line[y].y) * X_SIZE;
-		if (pixel_pos > 0 && pixel_pos < max_screen)
-			(*screen_line[y].screen)[pixel_pos] = color;
-		screen_line[y].complx_nbr.r += screen_line->increment_r;
+			if (pixel_pos > 0 && pixel_pos < max_screen)
+				(*screen_line[y].screen)[pixel_pos] =
+					(suite_operation(screen_line[y].complx_nbr, 0,
+									screen_line[y].complx_nbr_suite));
+			screen_line[y].complx_nbr.r += screen_line->increment_r;
 		}
 		y++;
 	}
@@ -78,8 +75,10 @@ void			fractal(int **screen, t_complx complx_nbr_suite)
 		screen_line[y].screen = screen;
 		screen_line[y].increment_r = increment_r;
 		increment_i += increment_i_increment;
-		screen_line[y].complx_nbr.i = (get_fractal_focus() / 2) - increment_i - set_get_mouse_pos_at_zoom(0).i;
-		screen_line[y].complx_nbr.r = - (get_fractal_focus() / 2) - set_get_mouse_pos_at_zoom(0).r;
+		screen_line[y].complx_nbr.i = (get_fractal_focus() / 2)
+			- increment_i - set_get_mouse_pos_at_zoom(0).i;
+		screen_line[y].complx_nbr.r = -(get_fractal_focus() / 2)
+			- set_get_mouse_pos_at_zoom(0).r;
 	}
 	create_threads(screen_line_func, screen_line);
 }

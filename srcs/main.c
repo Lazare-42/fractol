@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 12:07:08 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/27 13:17:26 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/16 11:47:02 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 #include "../includes/fractol.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+static int		loop_fractal(int necessary)
+{
+	(void)necessary;
+	fractal_handler();
+	return (1);
+}
 
 static	t_mlx	my_mlx_init(void)
 {
@@ -74,7 +81,8 @@ int				main(int ac, char **av)
 	if (ac > 2)
 		unrecognized_option();
 	arg_len = ft_strlen(av[1]);
-	if (arg_len != 6 && arg_len != 5 && arg_len != 10 && arg_len != 12 && arg_len != 9)
+	if (arg_len != 6 && arg_len != 5 && arg_len != 10 && arg_len
+			!= 12 && arg_len != 9)
 		unrecognized_option();
 	if (arg_len == 5 && ft_memcmp(av[1], "julia", 5))
 		unrecognized_option();

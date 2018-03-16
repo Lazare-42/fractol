@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:15:15 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/27 11:20:35 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/16 11:48:12 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	mouse_func(int x, int y, int b)
 	focus = 0;
 	focus = get_fractal_focus();
 	x_zoom = (double)(x / (double)X_SIZE - 0.5) * focus;
-	y_zoom = -1 * (y / (double)Y_SIZE - 0.5) *  focus;
+	y_zoom = -1 * (y / (double)Y_SIZE - 0.5) * focus;
 	set_get_mouse_pos(x_zoom, y_zoom);
 	return (1);
 }
