@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:21:32 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/27 11:25:05 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/16 10:13:34 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,6 @@ typedef struct		s_mlx
 	int				*screen_data;
 	int				keycode;
 }					t_mlx;
-
-typedef struct		s_bzero
-{
-	size_t			size;
-	void			*s;
-}					t_bzero;
 
 typedef struct		s_complx
 {
@@ -108,6 +102,5 @@ int					set_get_max_color_distance(int max_color_scale);
 void				budhabrot(int **screen, t_complx complx_nbr_suite);
 int					set_get_max_color_scale(int max_color_scale);;
 void				create_threads(void func(void*), void *arg);
-int					multithread_bzero_or_screenstruct(int which);
 
 #endif

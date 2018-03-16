@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractal.c                                          :+:      :+:    :+:   */
+/*   budhabrot.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/27 11:24:13 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/27 13:14:05 by lazrossi         ###   ########.fr       */
+/*   Created: 2018/03/16 10:14:03 by lazrossi          #+#    #+#             */
+/*   Updated: 2018/03/16 10:24:33 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 #include "../libft/includes/libft.h"
 #include <stdlib.h>
-#include <stdio.h>
 #include <pthread.h>
-#include <math.h>
 
-static void	screen_line_func(void *arg);
-
-static int		suite_operation(t_complx complx_nbr, double color,
+static void				suite_operation(t_complx complx_nbr, double color,
 		t_complx suite_nbr, t_screen_line *screen_line)
 {
 	double	where_x;
@@ -34,24 +30,22 @@ static int		suite_operation(t_complx complx_nbr, double color,
 	while (++color <= 2000)
 	{
 		if ((suite_nbr.i * suite_nbr.i + suite_nbr.r * suite_nbr.r) > 4)
-			return (0);
+			return ;
 		else
 		{
-			where_x = (suite_nbr.i + half_focus) / (focus);
-			where_x *= X_SIZE;
-			where_y = suite_nbr.r + half_focus;
-			where_y /= focus;
+			where_x = ((suite_nbr.i + half_focus) / (focus)) * X_SIZE;
+			where_y = (suite_nbr.r + half_focus) / focus;
 			where_y = (int)(where_y * Y_SIZE) * X_SIZE;
-			if ((int)(where_x + where_y) > 0 && (int)(where_x + where_y) < X_SIZE * Y_SIZE)
+			if ((int)(where_x + where_y) > 0 && (int)(where_x + where_y)
+					< X_SIZE * Y_SIZE)
 				(*screen_line->screen)[(int)(where_x + where_y)] += 1;
 		}
 		suite_nbr = multiply_complexes(suite_nbr, suite_nbr);
 		suite_nbr = add_complexes(suite_nbr, complx_nbr);
 	}
-	return (0);
 }
 
-static void		screen_line_func(void *arg)
+static void				screen_line_func(void *arg)
 {
 	t_screen_line	*screen_line;
 	double			x;
@@ -66,14 +60,15 @@ static void		screen_line_func(void *arg)
 		x = -1;
 		while (++x < X_SIZE)
 		{
-			suite_operation((screen_line[y]).complx_nbr, 0, screen_line[y].complx_nbr_suite, &(screen_line[y]));
+			suite_operation((screen_line[y]).complx_nbr, 0,
+					screen_line[y].complx_nbr_suite, &(screen_line[y]));
 			screen_line[y].complx_nbr.r += screen_line[y].increment_r;
 		}
 		y++;
 	}
 }
 
-static 	t_screen_line	*create_screen_line(void)
+static t_screen_line	*create_screen_line(void)
 {
 	t_screen_line	*screen_line;
 
@@ -83,7 +78,7 @@ static 	t_screen_line	*create_screen_line(void)
 	return (screen_line);
 }
 
-void			budhabrot(int **screen, t_complx complx_nbr_suite)
+void					budhabrot(int **screen, t_complx complx_nbr_suite)
 {
 	int						y;
 	double					increment_r;
@@ -104,41 +99,10 @@ void			budhabrot(int **screen, t_complx complx_nbr_suite)
 		screen_line[y].screen = screen;
 		screen_line[y].increment_r = increment_r;
 		increment_i += increment_i_increment;
-		screen_line[y].complx_nbr.i = (get_fractal_focus() / 2) - increment_i - set_get_mouse_pos_at_zoom(0).i;
-		screen_line[y].complx_nbr.r = - (get_fractal_focus() / 2) - set_get_mouse_pos_at_zoom(0).r;
+		screen_line[y].complx_nbr.i = (get_fractal_focus() / 2)
+			- increment_i - set_get_mouse_pos_at_zoom(0).i;
+		screen_line[y].complx_nbr.r = -(get_fractal_focus() / 2)
+			- set_get_mouse_pos_at_zoom(0).r;
 	}
 	create_threads(screen_line_func, screen_line);
-	/*
-	int i;
-	int x;
-	int max;
-	int color;
-
-	i = 0;
-	max = 0;
-	while (i < Y_SIZE)
-	{
-		x = 0;
-		while (x < X_SIZE)
-		{
-			max = ((*screen)[x + y * X_SIZE] > max ) ? (*screen)[x + y * X_SIZE] : max;
-			x++;
-		}
-		i++;
-	}
-	set_get_max_color_scale(max);
-	i = 0;
-	while (i < Y_SIZE)
-	{
-		x = 0;
-		while (x < X_SIZE)
-		{
-			color = color_range((*screen)[x + y * X_SIZE]);
-//			(*screen)[x + y * X_SIZE] = color;
-	//		printf("%d\n", color);
-			x++;
-		}
-		i++;
-	}
-	*/
 }

@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:00:05 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/27 13:07:42 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/16 10:12:52 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,6 @@ int		loop_fractal(int necessary)
 	(void)necessary;
 	fractal_handler();
 	return (1);
-}
-
-t_bzero thread_bzero(void *screen_data, size_t erase)
-{
-	struct t_bzero;
-
-	t_bzero.s = screen_data;
-	t_bzero.size = erase;
-	return (t_bzero);
 }
 
 void	fractal_handler(void)
