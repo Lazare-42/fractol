@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:26:51 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 11:31:59 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/16 17:15:34 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,25 @@
 #include "../minilibx_macos/mlx.h"
 #include <stdio.h>
 
-double		square_color_range(int square_center)
+double		square_color_range(int square_nbr)
 {
-	static double color_scale = (double)(256 * 255) / (X_SIZE);
-	static double color_chosen = 0;
-
-	if (!square_center)
-		return (color_chosen);
-	color_chosen = square_center * color_scale;
-	return (color_chosen);
+	if (square_nbr == 1)
+		return (32010005);
+	if (square_nbr == 2)
+		return (62500003);
+	if (square_nbr == 3)
+		return (123500006);
+	if (square_nbr == 4)
+		return (245005003);
+	return (100000);
 }
 
-int			set_get_max_color_scale(int max_color_scal)
+int			set_get_max_color_scale(int max_color_scale)
 {
-	static double color_scal = (double)((256 * 255 * 256) / MAX_COLOR_DISTANCE);
+	static double color_scal = (double)(16711000) / (double)MAX_COLOR_DISTANCE;
 
-	if (max_color_scal)
-		color_scal = (double)(256 * 255 * 256) / (double)max_color_scal;
+	if (max_color_scale)
+		color_scal = (double)(256 * 255 * 256) / (double)max_color_scale;
 	return (color_scal);
 }
 

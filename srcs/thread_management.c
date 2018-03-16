@@ -6,13 +6,14 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 11:39:01 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 11:41:54 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/16 15:49:31 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 #include "../libft/includes/libft.h"
 #include <sys/sysctl.h>
+#include <pthread.h>
 
 int		set_get_screen_lines_per_thread(int core_number)
 {

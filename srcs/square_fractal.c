@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:12:38 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 11:50:23 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/16 17:49:18 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,27 @@ static	void	recurse_screen_fill(int **screen,
 	{
 		new_start_location = start_location + (size / 4) * X_SIZE -
 			new_center;
-		screen_fill(screen, new_center, new_start_location);
+		screen_fill(screen, new_center, new_start_location, 1);
 		new_start_location = start_location + (size) + (size / 4) * X_SIZE;
-		screen_fill(screen, new_center, new_start_location);
+		screen_fill(screen, new_center, new_start_location, 2);
 		new_start_location = start_location + (size / 4) - (new_center)
 			* X_SIZE;
-		screen_fill(screen, new_center, new_start_location);
+		screen_fill(screen, new_center, new_start_location, 3);
 		new_start_location = start_location + (size / 4) + size * X_SIZE;
-		screen_fill(screen, new_center, new_start_location);
+		screen_fill(screen, new_center, new_start_location, 4);
 	}
 }
 
-void			screen_fill(int **screen, int size, int start_location)
+void			screen_fill(int **screen, int size, int start_location,
+		int sqrt)
 {
 	static	int	max_screen_pixel = X_SIZE * Y_SIZE;
-	static	int recurse_number = 0;
 	int			x;
 	int			y;
 	int			where_to;
 
 	y = -1;
 	where_to = 0;
-	square_color_range(recurse_number);
 	while (++y < size)
 	{
 		x = -1;
@@ -60,10 +59,9 @@ void			screen_fill(int **screen, int size, int start_location)
 			where_to = x + y * X_SIZE + start_location;
 			if (where_to >= 0 && where_to <= max_screen_pixel)
 				(*screen)[where_to] = (!(*screen)[where_to]) ?
-					square_color_range(0) : 0;
+					square_color_range(sqrt) : 0;
 		}
 	}
-	recurse_number++;
 	recurse_screen_fill(screen, size, start_location);
 }
 
@@ -80,11 +78,12 @@ static int		set_get_image_center(int square_size)
 void			square_fractal(int **screen)
 {
 	int				square_location;
-	static double	square_size = Y_SIZE;
+	double			square_size;
 	int				change_image;
 	static int		first = 1;
 
 	change_image = Y_SIZE;
+	square_size = Y_SIZE;
 	if (!first)
 	{
 		change_image = set_get_focus(0);
@@ -92,7 +91,7 @@ void			square_fractal(int **screen)
 			return ;
 	}
 	first = 0;
-	square_size *= set_get_focus(0);
+	square_size *= set_get_focus(0) / 4;
 	square_location = set_get_image_center(square_size);
-	screen_fill(screen, square_size / 3, square_location);
+	screen_fill(screen, square_size / 3, square_location, 0);
 }
