@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:26:51 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 17:15:34 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/17 13:22:50 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../includes/fractol.h"
 #include "../libft/includes/libft.h"
 #include "../minilibx_macos/mlx.h"
-#include <stdio.h>
+#include <math.h>
 
 double		square_color_range(int square_nbr)
 {
@@ -29,24 +29,14 @@ double		square_color_range(int square_nbr)
 	return (100000);
 }
 
-int			set_get_max_color_scale(int max_color_scale)
-{
-	static double color_scal = (double)(16711000) / (double)MAX_COLOR_DISTANCE;
-
-	if (max_color_scale)
-		color_scal = (double)(256 * 255 * 256) / (double)max_color_scale;
-	return (color_scal);
-}
-
 double		color_range(double color)
 {
-	double			color_scale;
-	static double	color_chosen = 0;
+	double	color_chosen;
 
+	color_chosen = 0;
 	if (!color)
 		return (color_chosen);
-	color_scale = set_get_max_color_scale(0);
-	color_chosen = color * color_scale;
+	color_chosen = pow(color, 5);
 	return (color_chosen);
 }
 

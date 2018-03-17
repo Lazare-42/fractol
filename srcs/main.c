@@ -6,13 +6,12 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 12:07:08 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 11:47:02 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/17 13:49:48 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minilibx_macos/mlx.h"
 #include "../libft/includes/libft.h"
-#include "../includes/mlx_keycode.h"
 #include <unistd.h>
 #include "../includes/fractol.h"
 #include <stdlib.h>

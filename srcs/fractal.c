@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:24:13 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 11:29:04 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/17 13:46:41 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,17 @@
 #include <pthread.h>
 #include <math.h>
 
-static int		suite_operation(t_complx complx_nbr, double color,
-		t_complx suite_nbr)
+static int		suite_operation(t_complx suite_nbr, double color,
+		t_complx complx_nbr)
 {
+	t_complx swap;
+
+	if (set_get_fractal_choosen(0) == 10)
+	{
+		swap = suite_nbr;
+		suite_nbr = complx_nbr;
+		complx_nbr = swap;
+	}
 	while (color <= MAX_COLOR_DISTANCE)
 	{
 		if ((suite_nbr.i * suite_nbr.i + suite_nbr.r * suite_nbr.r) > 4)

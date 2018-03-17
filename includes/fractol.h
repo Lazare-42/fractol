@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 15:47:10 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 17:09:07 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/17 13:49:50 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # define X_SIZE 1000
 # define Y_SIZE 1000
+# define KEYPRESS 2
+# define KEYRELEASE 3
+# define BUTTONPRESS 4
+# define BUTTONRELEASE 5
+# define MOTIONNOTIFY 6
+# define ENTERNOTIFY 7
+# define LEAVENOTIFY 8
+# define FOCUSIN 9
 # define ZOOM_IN 0.95
 # define ZOOM_OUT 1.05
 # define MAX_COLOR_DISTANCE 150

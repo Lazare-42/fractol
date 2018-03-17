@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 15:12:38 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 18:11:57 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/03/16 17:49:18 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-	void	recurse_screen_fill(int **screen,
+static	void	recurse_screen_fill(int **screen,
 		int size, int start_location)
 {
 	static int	recurse_number = 0;
@@ -45,17 +45,16 @@ void			screen_fill(int **screen, int size, int start_location,
 		int sqrt)
 {
 	static	int	max_screen_pixel = X_SIZE * Y_SIZE;
-	static  int recurse;
 	int			x;
 	int			y;
 	int			where_to;
 
 	y = -1;
 	where_to = 0;
-	while (++y < size / 2)
+	while (++y < size)
 	{
 		x = -1;
-		while (++x < size / 2)
+		while (++x < size)
 		{
 			where_to = x + y * X_SIZE + start_location;
 			if (where_to >= 0 && where_to <= max_screen_pixel)
@@ -63,17 +62,16 @@ void			screen_fill(int **screen, int size, int start_location,
 					square_color_range(sqrt) : 0;
 		}
 	}
-	recurse++;
-	if (
-//	recurse_screen_fill(screen, size, start_location);
+	recurse_screen_fill(screen, size, start_location);
 }
 
-static int		set_get_image_center(void)
+static int		set_get_image_center(int square_size)
 {
 	int image_center;
 
 	image_center = 0;
-	image_center = X_SIZE / 2 + Y_SIZE / 2 * X_SIZE;
+	image_center = X_SIZE / 2 + Y_SIZE / 2 * X_SIZE
+		- square_size / 3 / 2 - (square_size / 3 / 2) * X_SIZE;
 	return (image_center);
 }
 
@@ -85,7 +83,7 @@ void			square_fractal(int **screen)
 	static int		first = 1;
 
 	change_image = Y_SIZE;
-	square_size = Y_SIZE / 2;
+	square_size = Y_SIZE;
 	if (!first)
 	{
 		change_image = set_get_focus(0);
@@ -94,6 +92,6 @@ void			square_fractal(int **screen)
 	}
 	first = 0;
 	square_size *= set_get_focus(0) / 4;
-	square_location = set_get_image_center();
+	square_location = set_get_image_center(square_size);
 	screen_fill(screen, square_size / 3, square_location, 0);
 }
