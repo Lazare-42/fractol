@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup_free.c                                   :+:      :+:    :+:   */
+/*   ft_put_error_return_null.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/21 00:36:25 by lazrossi          #+#    #+#             */
-/*   Updated: 2017/12/21 00:39:56 by lazrossi         ###   ########.fr       */
+/*   Created: 2018/06/25 18:18:40 by lazrossi          #+#    #+#             */
+/*   Updated: 2018/06/25 18:18:42 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strdupfrom_free(char *str, int i)
-{
-	char	*dest;
+#include "../includes/libft.h"
 
-	dest = NULL;
-	if (str[i])
-		if (!(str = ft_strdup(&str[i])))
-			return (NULL);
-	ft_memdel((void**)str);
-	return (str);
+void	*ft_put_error_return_null(char *error_msg, char *function_name)
+{
+	ft_putstr_fd(error_msg, 2);
+	ft_putstr_fd(" in function : ", 2);
+	ft_putstr_fd(function_name, 2);
+	ft_putchar('\n');
+	return (NULL);
 }

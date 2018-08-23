@@ -17,7 +17,9 @@ char	*ft_strdupfrom_free(const char **src, int from)
 {
 	char	*str;
 
-	str = ft_strdup(&(*src)[from]);
+	str = NULL;
+	if (!(str = ft_strdup(&(*src)[from])))
+		return (NULL);
 	ft_memdel((void**)src);
 	return (str);
 }

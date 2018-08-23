@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 11:36:19 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/02/21 11:36:21 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/06/28 09:39:32 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	debug(void)
 
 	nbr++;
 	ft_putstr("Debug");
+	ft_putchar(' ');
 	ft_putnbr(nbr);
 	ft_putchar('\n');
 }

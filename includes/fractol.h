@@ -6,15 +6,15 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 15:47:10 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/17 13:49:50 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/23 22:59:24 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define X_SIZE 1000
-# define Y_SIZE 1000
+# define X_SIZE 2560
+# define Y_SIZE 1440
 # define KEYPRESS 2
 # define KEYRELEASE 3
 # define BUTTONPRESS 4
@@ -25,7 +25,18 @@
 # define FOCUSIN 9
 # define ZOOM_IN 0.95
 # define ZOOM_OUT 1.05
-# define MAX_COLOR_DISTANCE 150
+# define INIT_COLOR_DISTANCE 30
+# define SPACE_BAR 49
+# define ESC 53
+# define PLUS 69
+# define P 35
+# define MINUS 78
+# define M 46
+# define VIOLET 0x9370DB
+# define CYAN	0x37FDFC
+# define GREY	0xA9A9A9
+# define P_RED    0xFF6961
+# define WIN_CO 0xee0000
 
 typedef struct		s_mlx
 {
@@ -94,5 +105,6 @@ int					set_get_max_color_distance(int max_color_scale);
 void				budhabrot(int **screen, t_complx complx_nbr_suite);
 int					set_get_max_color_scale(int max_color_scale);
 void				create_threads(void func(void*), void *arg);
+int					set_get_iterations(int action);
 
 #endif

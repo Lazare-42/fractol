@@ -6,11 +6,13 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 14:01:26 by lazrossi          #+#    #+#             */
-/*   Updated: 2017/09/06 19:40:58 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/06/30 23:30:01 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+
+#include <unistd.h>
 
 void	ft_putstr(char *str)
 {

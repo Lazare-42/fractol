@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:00:05 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 11:46:25 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/23 22:56:52 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ t_mlx	set_get_mlx(t_mlx *mlx)
 	if (mlx)
 		mlx_linker = *mlx;
 	return (mlx_linker);
+}
+
+int		set_get_iterations(int action)
+{
+	static	int	iterations = INIT_COLOR_DISTANCE;
+
+	if (!action)
+		return (iterations);
+	if (action == 1)
+		iterations += 10;
+	else
+		iterations -= 10;
+	return (action);
 }
 
 double	set_get_focus(int sign)
@@ -83,6 +96,7 @@ void	fractal_handler(void)
 		fractal(&(mlx.screen_data), first_complx);
 	else if (fractal_number_choosen == 9)
 		budhabrot(&(mlx.screen_data), first_complx);
+	ft_printf("%d is iterations per seconds\n", set_get_iterations(0));
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.image, 0, 0);
 	put_fps();
 }

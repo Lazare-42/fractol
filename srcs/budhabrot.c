@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:14:03 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 10:24:33 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/23 23:01:04 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void				suite_operation(t_complx complx_nbr, double color,
 	focus = get_fractal_focus();
 	half_focus = focus / 2;
 	screen_size = X_SIZE * Y_SIZE;
-	while (++color <= 2000)
+	while (++color <= set_get_iterations(0))
 	{
 		if ((suite_nbr.i * suite_nbr.i + suite_nbr.r * suite_nbr.r) > 4)
 			return ;

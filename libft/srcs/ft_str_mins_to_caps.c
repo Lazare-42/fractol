@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_mins_to_caps.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/08 14:01:32 by lazrossi          #+#    #+#             */
-/*   Updated: 2017/09/05 10:26:59 by lazrossi         ###   ########.fr       */
+/*   Created: 2018/06/25 18:18:29 by lazrossi          #+#    #+#             */
+/*   Updated: 2018/06/29 22:59:35 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
+#include "../includes/libft.h"
 
-# define GET_NEXT_LINE_H
-
-# define BUFF_SIZE 2056
-
-# include <unistd.h>
-
-int					get_next_line(const int fd, char **line, char tofind);
-typedef	struct		s_gnl
+void	ft_str_mins_to_caps(char *c)
 {
-	char			*rest;
-	int				fd;
-	struct s_gnl	*next;
-}					t_gnl;
-#endif
+	while (*c)
+	{
+		if (ft_isalpha(*c))
+			*c -= 32;
+		c++;
+	}
+}

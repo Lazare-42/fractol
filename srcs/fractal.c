@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:24:13 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/17 13:46:41 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/23 22:48:09 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		suite_operation(t_complx suite_nbr, double color,
 		suite_nbr = complx_nbr;
 		complx_nbr = swap;
 	}
-	while (color <= MAX_COLOR_DISTANCE)
+	while (color <= set_get_iterations(0))
 	{
 		if ((suite_nbr.i * suite_nbr.i + suite_nbr.r * suite_nbr.r) > 4)
 			return (color_range(color));

@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:26:51 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/17 13:22:50 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/23 22:59:30 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,26 @@ double		square_color_range(int square_nbr)
 	return (100000);
 }
 
+#include <stdio.h>
 double		color_range(double color)
 {
-	double	color_chosen;
+	t_color_compound	violet;
+	int					iterations;
+	float				time;
 
-	color_chosen = 0;
+	violet.rgb = 0;
 	if (!color)
-		return (color_chosen);
-	color_chosen = pow(color, 5);
-	return (color_chosen);
+		return (violet.rgb);
+	time = color / set_get_iterations(0);
+	time = sin(time);
+	iterations = set_get_iterations(0);
+	violet = ft_decompose_color(P_RED);
+	violet.red = (int)(((float)violet.red * (float)time));
+	violet.green = (int)(((float)violet.green * (float)time));
+	violet.blue = (int)(((float)violet.blue * (float)time));
+	violet.rgb = violet.red << 16 | violet.green << 8 | violet.blue;
+	violet.rgb = violet.red << 16 | violet.green << 8 | violet.blue;
+	return (violet.rgb);
 }
 
 int			pause_julia(int activate)

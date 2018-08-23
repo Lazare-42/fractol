@@ -1,0 +1,42 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+add_complexes	complexe_operations.c	/^t_complx	add_complexes(t_complx a, t_complx b)$/;"	f
+budhabrot	budhabrot.c	/^void					budhabrot(int **screen, t_complx complx_nbr_suite)$/;"	f
+color_range	mouse_color_actions.c	/^double		color_range(double color)$/;"	f
+create_screen_line	budhabrot.c	/^static t_screen_line	*create_screen_line(void)$/;"	f	file:
+create_threads	thread_management.c	/^void	create_threads(void func(void*), void *arg)$/;"	f
+draw	main.c	/^static int		draw(void)$/;"	f	file:
+fractal	fractal.c	/^void			fractal(int **screen, t_complx complx_nbr_suite)$/;"	f
+fractal_handler	static_variables.c	/^void	fractal_handler(void)$/;"	f
+get_fractal_focus	static_variables.c	/^double	get_fractal_focus(void)$/;"	f
+keycode_func	user_actions.c	/^int	keycode_func(int keycode, int b)$/;"	f
+loop_fractal	main.c	/^static int		loop_fractal(int necessary)$/;"	f	file:
+main	main.c	/^int				main(int ac, char **av)$/;"	f
+mouse_func	user_actions.c	/^int	mouse_func(int x, int y, int b)$/;"	f
+mouse_zoom	user_actions.c	/^int	mouse_zoom(int button, int x, int y, int b)$/;"	f
+multiply_complexes	complexe_operations.c	/^t_complx	multiply_complexes(t_complx a, t_complx b)$/;"	f
+my_mlx_init	main.c	/^static	t_mlx	my_mlx_init(void)$/;"	f	file:
+pause_julia	mouse_color_actions.c	/^int			pause_julia(int activate)$/;"	f
+put_fps	frames_per_seconds.c	/^void	put_fps(void)$/;"	f
+recurse_screen_fill	square_fractal.c	/^static	void	recurse_screen_fill(int **screen,$/;"	f	file:
+screen_fill	square_fractal.c	/^void			screen_fill(int **screen, int size, int start_location,$/;"	f
+screen_line_func	budhabrot.c	/^static void				screen_line_func(void *arg)$/;"	f	file:
+screen_line_func	fractal.c	/^static void		screen_line_func(void *arg)$/;"	f	file:
+set_get_core_numbers	thread_management.c	/^int		set_get_core_numbers(void)$/;"	f
+set_get_focus	static_variables.c	/^double	set_get_focus(int sign)$/;"	f
+set_get_fractal_choosen	static_variables.c	/^int		set_get_fractal_choosen(int fractal_number)$/;"	f
+set_get_image_center	square_fractal.c	/^static int		set_get_image_center(int square_size)$/;"	f	file:
+set_get_iterations	static_variables.c	/^int		set_get_iterations(int action)$/;"	f
+set_get_mlx	static_variables.c	/^t_mlx	set_get_mlx(t_mlx *mlx)$/;"	f
+set_get_mouse_pos	mouse_color_actions.c	/^t_complx	set_get_mouse_pos(double x, double y)$/;"	f
+set_get_mouse_pos_at_zoom	set_get_mouse_pos_at_zoom.c	/^t_complx	set_get_mouse_pos_at_zoom(int set)$/;"	f
+set_get_screen_lines_per_thread	thread_management.c	/^int		set_get_screen_lines_per_thread(int core_number)$/;"	f
+square_color_range	mouse_color_actions.c	/^double		square_color_range(int square_nbr)$/;"	f
+square_fractal	square_fractal.c	/^void			square_fractal(int **screen)$/;"	f
+suite_operation	budhabrot.c	/^static void				suite_operation(t_complx complx_nbr, double color,$/;"	f	file:
+suite_operation	fractal.c	/^static int		suite_operation(t_complx suite_nbr, double color,$/;"	f	file:
+unrecognized_option	main.c	/^static void		unrecognized_option(void)$/;"	f	file:

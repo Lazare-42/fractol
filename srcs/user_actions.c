@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:15:15 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 11:48:12 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/23 22:25:59 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@
 int	keycode_func(int keycode, int b)
 {
 	(void)b;
-	if (keycode == 53)
+	if (keycode == ESC)
 		exit(0);
-	if (keycode == 49)
+	else if (keycode == SPACE_BAR)
 		pause_julia(1);
+	else if (keycode == PLUS || keycode == P)
+		set_get_iterations(1);
+	else if (keycode == MINUS || keycode == M)
+		set_get_iterations(-1);
+//	ft_printf("%d\n is key touched", keycode);
 	return (1);
 }
 
