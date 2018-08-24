@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:24:13 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/08/23 22:48:09 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/24 19:46:03 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void		screen_line_func(void *arg)
 	while (y < set_get_screen_lines_per_thread(0))
 	{
 		x = -1;
-		while (++x < X_SIZE)
+		while (++x < X_SIZE - (X_SIZE / 5))
 		{
 			pixel_pos = (int)x + (screen_line[y].y) * X_SIZE;
 			if (pixel_pos > 0 && pixel_pos < max_screen)
@@ -72,7 +72,7 @@ void			fractal(int **screen, t_complx complx_nbr_suite)
 	t_screen_line	screen_line[Y_SIZE];
 	double			increment_i_increment;
 
-	increment_r = (double)(get_fractal_focus() / (double)X_SIZE);
+	increment_r = (double)(get_fractal_focus() / (double)(X_SIZE - X_SIZE / 4));
 	increment_i = (double)(get_fractal_focus() / (double)Y_SIZE);
 	increment_i_increment = increment_i;
 	y = -1;

@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:00:05 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/08/24 01:04:42 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/24 19:47:06 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,24 @@ int		set_get_fractal_choosen(int fractal_number)
 	return (fractal_number_choosen);
 }
 
-#include <stdio.h>
+void put_info(t_mlx mlx)
+{
+	char	fps_str[20];
+	char		*nbr;
+
+
+	nbr = NULL;
+	if (!(nbr = ft_itoa(put_fps())))
+		return ;
+	ft_memset((void*)fps_str, 0, 10);
+	ft_memcpy((void*)fps_str, "FPS : ", 6);
+	ft_memcpy((void*)&fps_str[6], nbr, ft_strlen(nbr));
+	ft_memdel((void**)&nbr);
+	mlx_string_put(mlx.mlx, mlx.win,
+			X_SIZE - (X_SIZE / 4),
+			0, GREY, (char*)fps_str);
+}
+
 void	fractal_handler(void)
 {
 	static int		fractal_number_choosen = 0;
@@ -87,7 +104,7 @@ void	fractal_handler(void)
 	if (fractal_number_choosen == JULIA)
 		if (!pause_julia(0))
 			first_complx = set_get_mouse_pos(0, 0);
-//	printf("%f is i, %f is r\n", first_complx.i, first_complx.r);
+	//	printf("%f is i, %f is r\n", first_complx.i, first_complx.r);
 	if (fractal_number_choosen == JULIA)
 		fractal(&(mlx.screen_data), first_complx);
 	else if (fractal_number_choosen == FRACTAL)
@@ -97,5 +114,5 @@ void	fractal_handler(void)
 	else if (fractal_number_choosen == BUDHA)
 		budhabrot(&(mlx.screen_data), first_complx);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.image, 0, 0);
-	put_fps();
+	put_info(mlx);
 }

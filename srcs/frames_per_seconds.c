@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 11:32:20 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 11:35:04 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/24 19:47:01 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,33 @@
 #include "../libft/includes/libft.h"
 #include <stdio.h>
 
-void	put_fps(void)
+int		put_fps(void)
 {
 	static time_t	launchtime = 0;
 	time_t			time_since;
 	static int		fps = 0;
+	char			*itoa;
 
 	if (!launchtime)
 	{
 		if (!(time(&launchtime)))
-			return ;
-		return ;
+			return (-1);
+		return (-1);
 	}
 	if (!(time(&time_since)))
-		return ;
+		return (-1);
 	if (time_since != launchtime)
 	{
 		if (time_since - launchtime == 1)
 		{
-			ft_putnbr((int)(fps));
-			ft_putstr(" FPS\n");
+			if (!(itoa = ft_itoa(fps)))
+				return (fps);
 		}
 		else
-			ft_putstr("FPS < 1\n");
+			return (0);
 		time(&launchtime);
 		fps = 0;
 	}
 	fps++;
+	return (-1);
 }
