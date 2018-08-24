@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 15:47:10 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/08/23 22:59:24 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/24 01:10:46 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ typedef struct		s_mlx
 	int				*screen_data;
 	int				keycode;
 }					t_mlx;
+
+typedef struct		s_location
+{
+	double			x;
+	double			y;
+}					t_location;
 
 typedef struct		s_complx
 {

@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:24:13 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/08/23 22:48:09 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/24 00:28:31 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void		screen_line_func(void *arg)
 	int				y;
 
 	y = 0;
+	get_move_screen(0, GET
 	screen_line = arg;
 	while (y < set_get_screen_lines_per_thread(0))
 	{

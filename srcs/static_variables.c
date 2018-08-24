@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:00:05 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/08/23 22:56:52 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/24 01:04:42 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	fractal_handler(void)
 {
 	static int		fractal_number_choosen = 0;
 	static int		erase = X_SIZE * Y_SIZE * 4;
-	static t_complx	first_complx = {0, 0, 0};
+	static t_complx	first_complx = {(double)1, (double)0.7, 0};
 	t_mlx			mlx;
 
 	fractal_number_choosen = (!fractal_number_choosen) ?
@@ -96,7 +96,6 @@ void	fractal_handler(void)
 		fractal(&(mlx.screen_data), first_complx);
 	else if (fractal_number_choosen == 9)
 		budhabrot(&(mlx.screen_data), first_complx);
-	ft_printf("%d is iterations per seconds\n", set_get_iterations(0));
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.image, 0, 0);
 	put_fps();
 }

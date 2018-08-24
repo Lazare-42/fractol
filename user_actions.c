@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:15:15 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/08/23 22:25:59 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/24 00:01:33 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ int	keycode_func(int keycode, int b)
 		set_get_iterations(1);
 	else if (keycode == MINUS || keycode == M)
 		set_get_iterations(-1);
+	else if (keycode == KEY_UP)
+		get_move_screen(0.2, 0);
+	else if (keycode == KEY_LEFT)
+		get_move_screen(0.0, -0.2);
+	else if (keycode == KEY_RIGHT)
+		get_move_screen(0, 0.2);
+	else if (keycode == KEY_DOWN)
+		get_move_screen(-0.2, 0);
 //	ft_printf("%d\n is key touched", keycode);
 	return (1);
 }

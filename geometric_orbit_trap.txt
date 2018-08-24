@@ -1,0 +1,24 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    geometric_orbit_trap.txt                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/08/24 00:19:37 by lazrossi          #+#    #+#              #
+#    Updated: 2018/08/24 00:26:49 by lazrossi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+Given an orbit - the sequence of points that was generated during the iteration 
+process -; for example as in the Mandelbrot set (0, c, c^2+c, ...), we can
+decide to study how this orbit looks like when drawn in the plane.
+
+It will be some sort point cloud. In fact, if the pixel c belongs to the Mandelbrot
+set (the interior) then orbit (c) will be boring, as the points of the orbit
+will converge to a fixed point or will oscillate between a number of fixed 
+points, which amounts depends in the bulb of the set we are in. The closer 
+to the border of the exterior, the longer the orbit will be
+
+
+Lapin !!
