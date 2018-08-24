@@ -71,30 +71,30 @@ int		set_get_fractal_choosen(int fractal_number)
 	return (fractal_number_choosen);
 }
 
+#include <stdio.h>
 void	fractal_handler(void)
 {
 	static int		fractal_number_choosen = 0;
 	static int		erase = X_SIZE * Y_SIZE * 4;
-	static t_complx	first_complx = {(double)1, (double)0.7, 0};
+	static t_complx	first_complx = {0, 0, 0};
 	t_mlx			mlx;
+
 
 	fractal_number_choosen = (!fractal_number_choosen) ?
 		set_get_fractal_choosen(0) : fractal_number_choosen;
 	mlx = set_get_mlx(NULL);
 	ft_bzero(mlx.screen_data, erase);
-	if (fractal_number_choosen == 5)
-	{
+	if (fractal_number_choosen == JULIA)
 		if (!pause_julia(0))
 			first_complx = set_get_mouse_pos(0, 0);
+//	printf("%f is i, %f is r\n", first_complx.i, first_complx.r);
+	if (fractal_number_choosen == JULIA)
 		fractal(&(mlx.screen_data), first_complx);
-	}
-	else if (fractal_number_choosen == 10)
+	else if (fractal_number_choosen == FRACTAL)
 		fractal(&(mlx.screen_data), first_complx);
-	else if (fractal_number_choosen == 6)
+	else if (fractal_number_choosen == SQUARE)
 		square_fractal(&(mlx.screen_data));
-	else if (fractal_number_choosen == 12)
-		fractal(&(mlx.screen_data), first_complx);
-	else if (fractal_number_choosen == 9)
+	else if (fractal_number_choosen == BUDHA)
 		budhabrot(&(mlx.screen_data), first_complx);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.image, 0, 0);
 	put_fps();

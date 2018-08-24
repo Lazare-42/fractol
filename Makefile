@@ -17,7 +17,7 @@ LIBDIR = libft
 MINILIBXDIR = minilibx_macos
 SDIR = srcs
 ODIR = bin
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 INCDIR = includes
 LDFLAGS = -L$(LIBDIR) -lpthread -lft -L$(MINILIBXDIR) -lmlx -framework AppKit -framework OpenGL
 LNCURSES = -lncurses

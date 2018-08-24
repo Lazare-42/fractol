@@ -13,8 +13,8 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define X_SIZE 2560
-# define Y_SIZE 1440
+# define X_SIZE 1440
+# define Y_SIZE 1200
 # define KEYPRESS 2
 # define KEYRELEASE 3
 # define BUTTONPRESS 4
@@ -25,7 +25,7 @@
 # define FOCUSIN 9
 # define ZOOM_IN 0.95
 # define ZOOM_OUT 1.05
-# define INIT_COLOR_DISTANCE 30
+# define INIT_COLOR_DISTANCE 60
 # define SPACE_BAR 49
 # define ESC 53
 # define PLUS 69
@@ -37,6 +37,11 @@
 # define GREY	0xA9A9A9
 # define P_RED    0xFF6961
 # define WIN_CO 0xee0000
+# define JULIA 5
+# define BUDHA  9
+# define MANDELBROT 12
+# define SQUARE 6
+# define FRACTAL 10
 
 typedef struct		s_mlx
 {

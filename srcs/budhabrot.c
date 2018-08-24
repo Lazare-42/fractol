@@ -15,12 +15,10 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-/*
-*/
-
 t_location	max_locaction(t_location loc, int reset)
 {
 	static t_location max_loc = {0, 0};
+
 	if (max_loc.x < loc.x)
 		max_loc.x = loc.x;
 	if (max_loc.y < loc.y)
@@ -56,14 +54,7 @@ static void				suite_operation(t_complx complx_nbr, double color,
 			loc.y = (int)(loc.y * Y_SIZE) * X_SIZE;
 			if ((int)(loc.x + loc.y) > 0 && (int)(loc.x + loc.y)
 					< screen_size)
-			{
-				// ne pas acceeder a l'ecran ici mais plutot avoir un tableau statique correspondant pour ensuite appliquer la bonne palette de couleurs
-				// qui depend de la distance max atteinte
-				// peut aussi etre plus rapide ?
-				// est necessaire car permet de
-				(*screen_line->screen)[(int)(loc.x + loc.y)] += 1;
-				(void)screen_line;
-			}
+				(*screen_line->screen)[(int)(loc.x + loc.y)] += 19;
 		}
 		suite_nbr = multiply_complexes(suite_nbr, suite_nbr);
 		suite_nbr = add_complexes(suite_nbr, complx_nbr);
@@ -104,50 +95,40 @@ static t_screen_line	*create_screen_line(void)
 	return (screen_line);
 }
 
+static unsigned char	color_tone(unsigned char rgb, unsigned char max_color_rgb)
+{
+	max_color_rgb /= 2;
+	if (rgb < 127)
+	{
+		rgb = 255 - rgb;
+		rgb = (int)((float)rgb * ((float)(1 - ((float)(rgb / max_color_rgb)))));
+	}
+	else
+		rgb = (int)((float)rgb * ((float)(rgb / max_color_rgb)));
+	return (rgb);
+}
+
 void					reaply_color(int **screen)
 {
 	t_color_compound	max_color;
 	t_color_compound	color;
 	t_location			max_loc = {0, 0};
-	int					x;
-	int					y;
+	t_location			pixel;
 
-	y = -1;
+	pixel.y = -1;
 	max_loc = max_locaction(max_loc, 0);
 	max_color = ft_decompose_color(max_loc.x + max_loc.y);
-	while (++y < Y_SIZE)
+	while (++pixel.y < Y_SIZE)
 	{
-		x = -1;
-		while (++x < X_SIZE)
+		pixel.x = -1;
+		while (++pixel.x < X_SIZE)
 		{
-			color = ft_decompose_color((*screen)[y * Y_SIZE + x]);
-			if (color.blue < 127 && color.green < 127 && color.red < 127)
-			{
-				color.red += 128;
-				color.blue += 128;
-				color.green += 128;
-				color.red = color.red * color.red / max_color.red;
-				color.green = color.green * color.green / max_color.green;
-				color.blue =  color.blue * color.blue / max_color.blue;
-			}
-			else
-			{
-				color.red = color.red * color.red / max_color.red;
-				color.green = color.green * color.green / max_color.green;
-				color.blue =  color.blue * color.blue / max_color.blue;
-			}
-			
-			color.rgb = color.red << 16 | color.green << 8 | color.blue;
-			(*screen)[y * Y_SIZE + x] = color.rgb;
-			//			ft_printf("%d x, %d y\n", x, y);
-			/*
-			   if (color.blue)
-			   {
-			   ft_printf("Max_color : [[red]]Red : %d[[end]] [[green]]green : %d [[end]][[blue]]blue : %d[[end]]\n", max_color.red, max_color.green, max_color.blue);
-			   ft_printf("Color 	 : [[red]]Red : %d[[end]] [[green]]green : %d [[end]][[blue]]blue : %d[[end]]\n", color.red, color.green, color.blue);
-			   }
-			   */
-
+			color = ft_decompose_color((*screen)[(int)pixel.y * X_SIZE + (int)pixel.x]);
+			color.red = color_tone(color.red, max_color.red);
+			color.green = color_tone(color.green, max_color.green);
+			color.blue = color_tone(color.blue, max_color.blue);
+			color.rgb =  (color.red << 16 | color.green << 8 | color.blue);
+			(*screen)[(int)pixel.y * X_SIZE + (int)pixel.x] = color.rgb;
 		}
 	}
 	max_locaction(max_loc, -1);
@@ -164,21 +145,19 @@ void					budhabrot(int **screen, t_complx complx_nbr_suite)
 	increment_r = (double)(get_fractal_focus() / (double)X_SIZE);
 	increment_i = (double)(get_fractal_focus() / (double)Y_SIZE);
 	increment_i_increment = increment_i;
-	y = Y_SIZE;
-	y *= -1;
-	y -= 1;
+	y = -1;
 	if (screen_line == NULL)
 		screen_line = create_screen_line();
-	while (++y < 0)
+	while (++y < Y_SIZE)
 	{
-		screen_line[y + Y_SIZE].complx_nbr_suite = complx_nbr_suite;
-		screen_line[y + Y_SIZE].y = y;
-		screen_line[y + Y_SIZE].screen = screen;
-		screen_line[y + Y_SIZE].increment_r = increment_r;
+		screen_line[y].complx_nbr_suite = complx_nbr_suite;
+		screen_line[y].y = y;
+		screen_line[y].screen = screen;
+		screen_line[y].increment_r = increment_r;
 		increment_i += increment_i_increment;
-		screen_line[y + Y_SIZE].complx_nbr.i = (get_fractal_focus() / 2)
+		screen_line[y].complx_nbr.i = (get_fractal_focus() / 2)
 			- increment_i - set_get_mouse_pos_at_zoom(0).i;
-		screen_line[y + Y_SIZE].complx_nbr.r = -(get_fractal_focus() / 2)
+		screen_line[y].complx_nbr.r = -(get_fractal_focus() / 2)
 			- set_get_mouse_pos_at_zoom(0).r;
 	}
 	create_threads(screen_line_func, screen_line);
