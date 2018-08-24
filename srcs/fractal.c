@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:24:13 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/08/24 19:46:03 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/24 20:27:23 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,29 @@ static void		screen_line_func(void *arg)
 	}
 }
 
-void			fractal(int **screen, t_complx complx_nbr_suite)
+void			fractal(int **screen, t_complx complx_nbr_suite, int which)
 {
 	int				y;
-	double			increment_r;
-	double			increment_i;
+	t_complx		increment;
 	t_screen_line	screen_line[Y_SIZE];
 	double			increment_i_increment;
 
-	increment_r = (double)(get_fractal_focus() / (double)(X_SIZE - X_SIZE / 4));
-	increment_i = (double)(get_fractal_focus() / (double)Y_SIZE);
-	increment_i_increment = increment_i;
+	if (which == BIG)
+		increment.r = (double)(get_fractal_focus() / (double)(X_SIZE - X_SIZE / 4));
+	else
+		increment.r = (double)(get_fractal_focus() / (double)(X_SIZE - X_SIZE / 4));
+	increment.i = (double)(get_fractal_focus() / (double)Y_SIZE);
+	increment_i_increment = increment.i;
 	y = -1;
 	while (++y < Y_SIZE)
 	{
 		screen_line[y].complx_nbr_suite = complx_nbr_suite;
 		screen_line[y].y = y;
 		screen_line[y].screen = screen;
-		screen_line[y].increment_r = increment_r;
-		increment_i += increment_i_increment;
+		screen_line[y].increment_r = increment.r;
+		increment.i += increment_i_increment;
 		screen_line[y].complx_nbr.i = (get_fractal_focus() / 2)
-			- increment_i - set_get_mouse_pos_at_zoom(0).i;
+			- increment.i - set_get_mouse_pos_at_zoom(0).i;
 		screen_line[y].complx_nbr.r = -(get_fractal_focus() / 2)
 			- set_get_mouse_pos_at_zoom(0).r;
 	}

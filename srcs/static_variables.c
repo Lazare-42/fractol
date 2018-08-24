@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:00:05 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/08/24 19:47:06 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/24 20:19:07 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,14 @@ void put_info(t_mlx mlx)
 {
 	char	fps_str[20];
 	char		*nbr;
+	static int	fps;
+	int			tmp;
 
 
 	nbr = NULL;
-	if (!(nbr = ft_itoa(put_fps())))
+	if ((tmp = put_fps()) != -1)
+			fps = tmp;
+	if (!(nbr = ft_itoa(fps)))
 		return ;
 	ft_memset((void*)fps_str, 0, 10);
 	ft_memcpy((void*)fps_str, "FPS : ", 6);

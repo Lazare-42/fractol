@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 15:47:10 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/08/24 19:24:06 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/24 20:22:47 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@
 # define MANDELBROT 12
 # define SQUARE 6
 # define FRACTAL 10
+# define ERROR -1235678
+# define BIG 2048
+# define SMALL 1024
 
 typedef struct		s_mlx
 {
@@ -92,7 +95,7 @@ void				square_fractal(int **screen);
 void				screen_fill(int **screen, int size, int start_location,
 		int sqrt);
 double				square_color_range(int square_center);
-void				fractal(int **screen, t_complx complx_nbr_suite);
+void				fractal(int **screen, t_complx complx_nbr_suite, int which);
 void				fractal_handler(void);
 int					**set_get_screen_cursor(int **screen_position);
 t_mlx				set_get_mlx(t_mlx *mlx);
