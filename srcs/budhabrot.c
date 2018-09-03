@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:14:03 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/08/24 03:10:35 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/25 20:45:24 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void				screen_line_func(void *arg)
 	y = 0;
 	color = 0;
 	screen_line = arg;
-	while (y < set_get_screen_lines_per_thread(0))
+	while (y < set_get_screen_lines_per_thread(0, BIG))
 	{
 		x = -1;
 		while (++x < X_SIZE)
@@ -160,6 +160,6 @@ void					budhabrot(int **screen, t_complx complx_nbr_suite)
 		screen_line[y].complx_nbr.r = -(get_fractal_focus() / 2)
 			- set_get_mouse_pos_at_zoom(0).r;
 	}
-	create_threads(screen_line_func, screen_line);
+	create_threads(screen_line_func, screen_line, BIG);
 	reaply_color(screen);
 }

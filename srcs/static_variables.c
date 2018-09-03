@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:00:05 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/08/24 20:19:07 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/26 16:53:32 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,30 +93,47 @@ void put_info(t_mlx mlx)
 			0, GREY, (char*)fps_str);
 }
 
+void	small_mandelbrot_call(int **screen_data)
+{
+	(void)screen_data;
+}
+
 void	fractal_handler(void)
 {
+	static t_info	info;
 	static int		fractal_number_choosen = 0;
 	static int		erase = X_SIZE * Y_SIZE * 4;
 	static t_complx	first_complx = {0, 0, 0};
 	t_mlx			mlx;
 
 
-	fractal_number_choosen = (!fractal_number_choosen) ?
-		set_get_fractal_choosen(0) : fractal_number_choosen;
+	fractal_number_choosen = set_get_fractal_choosen(0);
 	mlx = set_get_mlx(NULL);
 	ft_bzero(mlx.screen_data, erase);
 	if (fractal_number_choosen == JULIA)
 		if (!pause_julia(0))
 			first_complx = set_get_mouse_pos(0, 0);
 	//	printf("%f is i, %f is r\n", first_complx.i, first_complx.r);
+	/*
 	if (fractal_number_choosen == JULIA)
-		fractal(&(mlx.screen_data), first_complx);
+		fractal(&(mlx.screen_data), first_complx, BIG);
 	else if (fractal_number_choosen == FRACTAL)
-		fractal(&(mlx.screen_data), first_complx);
+		fractal(&(mlx.screen_data), first_complx, BIG);
 	else if (fractal_number_choosen == SQUARE)
 		square_fractal(&(mlx.screen_data));
 	else if (fractal_number_choosen == BUDHA)
 		budhabrot(&(mlx.screen_data), first_complx);
+	*/
+	static t_complx	void_complx = {0, 0, 0};
+	int				tmp;
+
+	tmp = set_get_fractal_choosen(0);
+	set_get_fractal_choosen(FRACTAL);
+	info.complx_nbr_suite = void_complx;
+	info.screen = &(mlx.screen_data); 
+	info.which = BIG;
+	fractal(info);
+	set_get_fractal_choosen(tmp);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.image, 0, 0);
-	put_info(mlx);
+//	put_info(mlx);
 }

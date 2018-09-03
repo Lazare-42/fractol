@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 12:07:08 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/17 13:49:48 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/25 20:42:44 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int				main(int ac, char **av)
 {
 	int arg_len;
 
-	set_get_screen_lines_per_thread(set_get_core_numbers());
+	set_get_screen_lines_per_thread(set_get_core_numbers(), BIG);
 	arg_len = 0;
 	if (ac < 2)
 		unrecognized_option();

@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 11:39:01 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/03/16 15:49:31 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/26 17:19:14 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,20 @@
 #include <sys/sysctl.h>
 #include <pthread.h>
 
-int		set_get_screen_lines_per_thread(int core_number)
+int		set_get_screen_lines_per_thread(int core_number, int which)
 {
 	static int lines_per_thread = 0;
+	static int lines_per_small_thread = 0;
 
 	if (!core_number)
-		return (lines_per_thread);
-	else
-		lines_per_thread = Y_SIZE / set_get_core_numbers();
+	{
+		if (which == BIG)
+			return (lines_per_thread);
+		else if (which == SMALL)
+			return (lines_per_small_thread);
+	}
+	lines_per_thread = Y_SIZE / set_get_core_numbers();
+	lines_per_small_thread = Y_SIZE / set_get_core_numbers() / 4;
 	return (lines_per_thread);
 }
 
@@ -35,19 +41,25 @@ int		set_get_core_numbers(void)
 		sysctlbyname("hw.logicalcpu", &core_number, &count_len, NULL, 0);
 	return (core_number);
 }
-
+#include <stdio.h>
 void	create_threads(void func(void*), void *arg)
 {
 	int				y;
-	t_screen_line	*arg_size;
+	t_info			*info;
 	pthread_t		threads[Y_SIZE];
 
 	y = -1;
-	arg_size = arg;
+	info = arg;
+	if ((*info).which == SMALL)
+	{
+		(*info).screen = &(*info).screen[X_SIZE - X_SIZE / 4];
+		(*info).screen = &(*info).screen[(Y_SIZE - Y_SIZE / 4) * X_SIZE];
+	}
 	while (++y < set_get_core_numbers())
 	{
+		(*info).screen = &(*info).screen[y * X_SIZE * set_get_screen_lines_per_thread(0, (*info).which)];
 		if (pthread_create(&threads[y], NULL, (void*)func,
-					&(arg_size[y * set_get_screen_lines_per_thread(0)])))
+			(void*)info))
 			ft_myexit("thread creation error");
 	}
 	y = -1;

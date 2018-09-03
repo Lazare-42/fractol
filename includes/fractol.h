@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 15:47:10 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/08/24 20:22:47 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/26 17:12:58 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,19 @@ typedef struct		s_complx
 typedef struct		s_screen_line
 {
 	t_complx		complx_nbr;
-	t_complx		complx_nbr_suite;
-	int				y;
-	int				x;
-	int				**screen;
-	int				thread;
 	double			increment_r;
 	double			offset_x;
 	double			offset_y;
 }					t_screen_line;
+
+typedef struct		s_info
+{
+	int				**screen;
+	int				which;
+	double			increment_r;
+	t_screen_line	line[Y_SIZE];
+	t_complx		complx_nbr_suite;
+}					t_info;
 
 double				***matrix_multiplication(double ***tab, int *dimensions);
 double				***center_matrix(double ***tab, int *field_size);
@@ -95,7 +99,7 @@ void				square_fractal(int **screen);
 void				screen_fill(int **screen, int size, int start_location,
 		int sqrt);
 double				square_color_range(int square_center);
-void				fractal(int **screen, t_complx complx_nbr_suite, int which);
+void				fractal(t_info info);
 void				fractal_handler(void);
 int					**set_get_screen_cursor(int **screen_position);
 t_mlx				set_get_mlx(t_mlx *mlx);
@@ -114,7 +118,7 @@ t_complx			multiply_complexes(t_complx a, t_complx b);
 t_complx			add_complexes(t_complx a, t_complx b);
 t_complx			set_get_mouse_pos_at_zoom(int set);
 int					set_get_core_numbers(void);
-int					set_get_screen_lines_per_thread(int core_number);
+int					set_get_screen_lines_per_thread(int core_number, int which);
 int					set_get_max_color_distance(int max_color_scale);
 void				budhabrot(int **screen, t_complx complx_nbr_suite);
 int					set_get_max_color_scale(int max_color_scale);

@@ -6,7 +6,7 @@
 /*   By: lazrossi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 11:24:13 by lazrossi          #+#    #+#             */
-/*   Updated: 2018/08/24 20:27:23 by lazrossi         ###   ########.fr       */
+/*   Updated: 2018/08/26 17:06:51 by lazrossi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <math.h>
-
-static int		suite_operation(t_complx suite_nbr, double color,
+#include <unistd.h>
+//static
+int		suite_operation(t_complx suite_nbr, double color,
 		t_complx complx_nbr)
 {
 	t_complx swap;
 
-	if (set_get_fractal_choosen(0) == 10)
+	if (set_get_fractal_choosen(0) == FRACTAL)
 	{
 		swap = suite_nbr;
 		suite_nbr = complx_nbr;
@@ -40,55 +41,66 @@ static int		suite_operation(t_complx suite_nbr, double color,
 
 static void		screen_line_func(void *arg)
 {
-	t_screen_line	*screen_line;
-	double			x;
-	int				pixel_pos;
-	static int		max_screen = X_SIZE * Y_SIZE;
+	t_info			*info;
+	int				x;
 	int				y;
+	int				size;
+	int				*screen;
 
-	y = 0;
-	screen_line = arg;
-	while (y < set_get_screen_lines_per_thread(0))
+	info = arg;
+	size = ((*info).which == BIG) ? X_SIZE - X_SIZE / 4: X_SIZE / 4;
+	y = -1;
+	screen = *(*info).screen;
+//j	ft_printf("%d is info.y\n", (*info).y);
+//	ft_printf("%d is info.x\n", (*info).x);
+	while (++y < set_get_screen_lines_per_thread(0, (*info).which))
 	{
 		x = -1;
-		while (++x < X_SIZE - (X_SIZE / 5))
+		while (++x < size)
 		{
-			pixel_pos = (int)x + (screen_line[y].y) * X_SIZE;
-			if (pixel_pos > 0 && pixel_pos < max_screen)
-				(*screen_line[y].screen)[pixel_pos] =
-					(suite_operation(screen_line[y].complx_nbr, 0,
-									screen_line[y].complx_nbr_suite));
-			screen_line[y].complx_nbr.r += screen_line->increment_r;
+			screen[(*info).y + y * X_SIZE + (*info).x + x] =
+				(suite_operation((*info).line[y].complx_nbr, 0,
+								 (*info).complx_nbr_suite));
+			(*info).line[y].complx_nbr.r += (*info).increment_r;
 		}
-		y++;
 	}
 }
 
-void			fractal(int **screen, t_complx complx_nbr_suite, int which)
+t_complx		set_increment_values(int which)
+{
+	t_complx		increment;
+
+	increment.r = get_fractal_focus();
+	increment.i = get_fractal_focus();
+	if (which == BIG)
+		increment.r /= (double)(X_SIZE - X_SIZE / 4);
+	else
+		increment.r /= (double)(X_SIZE / 4);
+	if (which == BIG)
+		increment.i /= (double)Y_SIZE;
+	else
+		increment.i /= (double)(Y_SIZE / 4);
+	return (increment);
+}
+
+void			fractal(t_info info)
 {
 	int				y;
 	t_complx		increment;
-	t_screen_line	screen_line[Y_SIZE];
 	double			increment_i_increment;
 
-	if (which == BIG)
-		increment.r = (double)(get_fractal_focus() / (double)(X_SIZE - X_SIZE / 4));
-	else
-		increment.r = (double)(get_fractal_focus() / (double)(X_SIZE - X_SIZE / 4));
-	increment.i = (double)(get_fractal_focus() / (double)Y_SIZE);
+	increment = set_increment_values(info.which);
 	increment_i_increment = increment.i;
 	y = -1;
-	while (++y < Y_SIZE)
+	info.increment_r = increment.r;
+	while ((++y < Y_SIZE && info.which == BIG) || (++y < Y_SIZE / 4 && info.which == SMALL))
 	{
-		screen_line[y].complx_nbr_suite = complx_nbr_suite;
-		screen_line[y].y = y;
-		screen_line[y].screen = screen;
-		screen_line[y].increment_r = increment.r;
+		info.line[y].y = y;
 		increment.i += increment_i_increment;
-		screen_line[y].complx_nbr.i = (get_fractal_focus() / 2)
+		info.line[y].complx_nbr.i = (get_fractal_focus() / 2)
 			- increment.i - set_get_mouse_pos_at_zoom(0).i;
-		screen_line[y].complx_nbr.r = -(get_fractal_focus() / 2)
+		info.line[y].complx_nbr.r = -(get_fractal_focus() / 2)
 			- set_get_mouse_pos_at_zoom(0).r;
 	}
-	create_threads(screen_line_func, screen_line);
+	create_threads(screen_line_func, &info);
 }
